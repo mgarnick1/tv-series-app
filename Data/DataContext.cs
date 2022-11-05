@@ -1,12 +1,24 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 
-
-public class TVSeriesContext : DbContext
+namespace tv_series_app.Models
 {
-    public TVSeriesContext(DbContextOptions<TVSeriesContext> options) : base(options)
-    {
 
+    public class DataContext : IdentityDbContext<User>
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+
+        }
     }
 }
+
