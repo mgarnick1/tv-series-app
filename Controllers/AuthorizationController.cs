@@ -8,15 +8,15 @@ using Microsoft.AspNetCore.Identity;
 namespace tv_series_app.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class Authorizationontroller : ControllerBase
+[Route("api/authorize")]
+public class Authorizationtroller : ControllerBase
 {
 
-    private readonly ILogger<Authorizationontroller> _logger;
+    private readonly ILogger<Authorizationtroller> _logger;
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
 
-    public Authorizationontroller(ILogger<Authorizationontroller> logger, IMapper mapper, UserManager<User> userManager)
+    public Authorizationtroller(ILogger<Authorizationtroller> logger, IMapper mapper, UserManager<User> userManager)
     {
         _logger = logger;
         _mapper = mapper;
