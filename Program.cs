@@ -5,8 +5,7 @@ using Microsoft.IdentityModel.Tokens;
 using tv_series_app.Models;
 using Microsoft.AspNetCore.Identity;
 using tv_series_app.Repositories;
-
-
+using tv_series_app.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,8 +21,16 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
+builder.Services.Configure<JwtHandler>(
+    builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddControllersWithViews();
-builder.Services.AddIdentity<User, IdentityRole>()
+
+builder.Services.AddIdentity<User, IdentityRole>(opt =>
+{
+    opt.Password.RequiredLength = 7;
+    opt.Password.RequireDigit = false;
+    opt.User.RequireUniqueEmail = true;
+})
     .AddEntityFrameworkStores<DataContext>();
 
 builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataConnection")));
@@ -50,7 +57,7 @@ builder.Services.AddAuthentication(opt =>
 
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-// builder.Services.AddScoped<JwtHandler>();
+
 
 
 var app = builder.Build();

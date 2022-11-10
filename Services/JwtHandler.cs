@@ -3,8 +3,9 @@ using System.Security.Claims;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.Configuration;
 
-namespace tv_series_app.Repositories
+namespace tv_series_app.Services
 {
     public class JwtHandler
     {
