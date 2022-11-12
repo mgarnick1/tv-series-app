@@ -4,6 +4,8 @@ using tv_series_app.Models;
 using AutoMapper;
 using tv_series_app.ViewModels;
 using Microsoft.AspNetCore.Identity;
+using tv_series_app.Services;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace tv_series_app.Controllers;
 
@@ -15,12 +17,14 @@ public class Authorizationtroller : ControllerBase
     private readonly ILogger<Authorizationtroller> _logger;
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
+    private readonly JwtHandler _jwtHandler;
 
-    public Authorizationtroller(ILogger<Authorizationtroller> logger, IMapper mapper, UserManager<User> userManager)
+    public Authorizationtroller(ILogger<Authorizationtroller> logger, IMapper mapper, UserManager<User> userManager, JwtHandler jwtHandler)
     {
         _logger = logger;
         _mapper = mapper;
         _userManager = userManager;
+        _jwtHandler = jwtHandler;
     }
 
     [HttpGet]
@@ -48,5 +52,20 @@ public class Authorizationtroller : ControllerBase
         }
 
         return StatusCode(201);
+    }
+
+    [HttpPost]
+    [Route("login")]
+    public async Task<IActionResult> Login([FromBody] UserViewModel model)
+    {
+        var user = await _userManager.FindByNameAsync(model.Email);
+        if(user == null || !await _userManager.CheckPasswordAsync(user, model.Password)) {
+            return Unauthorized(new AuthResponse { Error = "Invalid Authentication" });
+        }
+        var signingCredentials = _jwtHandler.GetSigningCredentials();
+        var claims = _jwtHandler.GetClaims(user);
+        var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
+        var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        return Ok( new AuthResponse { IsAuthSuccessful = true, Token = token });
     }
 }

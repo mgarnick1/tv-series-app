@@ -11,10 +11,10 @@ namespace tv_series_app.Services
     {
         private readonly IConfiguration _configuraion;
         private readonly IConfigurationSection _jwtSettings;
-        public JwtHandler(IConfiguration configuration, IConfigurationSection jwtSettings)
+        public JwtHandler(IConfiguration configuration)
         {
             _configuraion = configuration;
-            _jwtSettings = jwtSettings;
+            _jwtSettings = _configuraion.GetSection("JwtSettings");
         }
 
         public SigningCredentials GetSigningCredentials()

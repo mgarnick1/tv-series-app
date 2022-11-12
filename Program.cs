@@ -21,8 +21,6 @@ builder.Services.AddCors(options =>
 
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
-builder.Services.Configure<JwtHandler>(
-    builder.Configuration.GetSection("JwtSettings"));
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
@@ -57,6 +55,7 @@ builder.Services.AddAuthentication(opt =>
 
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<JwtHandler>();
 
 
 
