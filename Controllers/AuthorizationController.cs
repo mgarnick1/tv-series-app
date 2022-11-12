@@ -56,7 +56,7 @@ public class Authorizationtroller : ControllerBase
 
     [HttpPost]
     [Route("login")]
-    public async Task<IActionResult> Login([FromBody] UserViewModel model)
+    public async Task<IActionResult> Login([FromBody] LoginViewModel model)
     {
         var user = await _userManager.FindByNameAsync(model.Email);
         if(user == null || !await _userManager.CheckPasswordAsync(user, model.Password)) {

@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { PasswordConfirmationValidatorService } from 'src/shared/custom-validators/password-confirmation-validator.service';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { UserViewModel } from 'src/_interfaces/user/user.model';
@@ -17,7 +18,8 @@ export class RegisterUserComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private passConfValidator: PasswordConfirmationValidatorService
+    private passConfValidator: PasswordConfirmationValidatorService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +63,10 @@ export class RegisterUserComponent implements OnInit {
     this.authService
       .registerUser('api/authorize/registration', user)
       .subscribe({
-        next: (_) => console.log('Successful registration'),
+        next: (_) => {
+          console.log('Successful Registration');
+          this.router.navigate(['/authentication/login']);
+        },
         error: (err: HttpErrorResponse) => {
           this.errorMessage = err.message;
           this.showError = true;

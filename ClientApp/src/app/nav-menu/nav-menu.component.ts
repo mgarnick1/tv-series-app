@@ -1,13 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/shared/services/authentication.service';
 
 @Component({
   selector: 'app-nav-menu',
   templateUrl: './nav-menu.component.html',
-  styleUrls: ['./nav-menu.component.css']
+  styleUrls: ['./nav-menu.component.css'],
 })
-export class NavMenuComponent {
+export class NavMenuComponent implements OnInit {
+  public isUserAuthenticated: boolean;
   isExpanded = false;
+  constructor(private authService: AuthenticationService, private router: Router,) {}
+  ngOnInit(): void {
+    this.authService.authChanged.subscribe((res) => {
+      this.isUserAuthenticated = true;
+    });
+  }
 
+  public logout = () => {
+    this.authService.logout();
+    this.isUserAuthenticated = false;
+    this.router.navigate(["/"]);
+  }
   collapse() {
     this.isExpanded = false;
   }
