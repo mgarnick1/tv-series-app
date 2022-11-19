@@ -4,6 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.Configuration;
+using tv_series_app.ViewModels;
 
 namespace tv_series_app.Services
 {
@@ -25,11 +26,13 @@ namespace tv_series_app.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public List<Claim> GetClaims(IdentityUser user)
+        public List<Claim> GetClaims(IdentityUser user, UserViewModel userModel)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, user.Email)
+                new Claim("email", user.Email),
+                new Claim("firstName", userModel.FirstName),
+                new Claim("lastName", userModel.LastName)
             };
             return claims;
         }

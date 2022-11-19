@@ -14,6 +14,8 @@ namespace tv_series_app.Profiles
             CreateMap<UserViewModel, User>()
                 .ForMember(u => u.UserName, uvm => uvm.MapFrom(_ => _.Email))
             ;
+            CreateMap<User, UserViewModel>()
+            ;
         }
     }
 }

@@ -63,7 +63,8 @@ public class Authorizationtroller : ControllerBase
             return Unauthorized(new AuthResponse { Error = "Invalid Authentication" });
         }
         var signingCredentials = _jwtHandler.GetSigningCredentials();
-        var claims = _jwtHandler.GetClaims(user);
+        var userViewModel = _mapper.Map<UserViewModel>(user);
+        var claims = _jwtHandler.GetClaims(user, userViewModel);
         var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         return Ok( new AuthResponse { IsAuthSuccessful = true, Token = token });
