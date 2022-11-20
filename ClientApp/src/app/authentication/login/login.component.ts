@@ -6,6 +6,8 @@ import { LoginModel } from 'src/_interfaces/user/login.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { LocalService } from 'src/shared/services/local-service.service';
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +23,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private localService: LocalService
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +56,9 @@ export class LoginComponent implements OnInit {
     };
     this.authService.loginUser('api/authorize/login', user).subscribe({
       next: (res: AuthenticationResponse) => {
-        localStorage.setItem('token', res.token);
+        this.localService.saveData('token', res.token);
+        const user = jwtDecode(res.token);
+        this.localService.saveData('user', JSON.stringify(user))
         this.authService.sendAuthStateChangeNotification(res.isAuthSuccessful);
         this.router.navigate([this.returnUrl]);
       },

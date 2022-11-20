@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
+import { LocalService } from 'src/shared/services/local-service.service';
+import { ActiveUser } from 'src/_interfaces/user/active-user.model';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,18 +12,27 @@ import { AuthenticationService } from 'src/shared/services/authentication.servic
 export class NavMenuComponent implements OnInit {
   public isUserAuthenticated: boolean;
   isExpanded = false;
-  constructor(private authService: AuthenticationService, private router: Router,) {}
+  @Input() user: ActiveUser;
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router,
+    private localService: LocalService
+  ) {}
   ngOnInit(): void {
     this.authService.authChanged.subscribe((res) => {
       this.isUserAuthenticated = true;
     });
+    if (this.user && this.user.firstName) {
+      this.isUserAuthenticated = true;
+    }
   }
 
   public logout = () => {
     this.authService.logout();
     this.isUserAuthenticated = false;
-    this.router.navigate(["/"]);
-  }
+    this.localService.clearData();
+    this.router.navigate(['/']);
+  };
   collapse() {
     this.isExpanded = false;
   }
