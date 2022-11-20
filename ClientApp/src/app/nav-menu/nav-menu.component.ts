@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { LocalService } from 'src/shared/services/local-service.service';
@@ -13,6 +13,7 @@ export class NavMenuComponent implements OnInit {
   public isUserAuthenticated: boolean;
   isExpanded = false;
   @Input() user: ActiveUser;
+  @Output() newUser = new EventEmitter<ActiveUser>();
   constructor(
     private authService: AuthenticationService,
     private router: Router,
@@ -20,6 +21,11 @@ export class NavMenuComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.authService.authChanged.subscribe((res) => {
+      const userString = this.localService.getData('user');
+      if (userString) {
+        const user = JSON.parse(userString) as ActiveUser;
+        this.newUser.emit(user);
+      }
       this.isUserAuthenticated = true;
     });
     if (this.user && this.user.firstName) {
