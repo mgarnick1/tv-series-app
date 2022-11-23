@@ -22,6 +22,8 @@ builder.Services.AddCors(options =>
 // Add services to the container.
 builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddControllersWithViews();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddIdentity<User, IdentityRole>(opt =>
 {
@@ -67,6 +69,8 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseSwagger();
+app.UseSwaggerUI();
 
 
 
