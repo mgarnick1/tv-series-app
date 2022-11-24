@@ -26,10 +26,11 @@ namespace tv_series_app.Services
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
         }
 
-        public List<Claim> GetClaims(IdentityUser user, UserViewModel userModel)
+        public List<Claim> GetClaims(IdentityUser user, UserViewModel userModel, string userId)
         {
             var claims = new List<Claim>
             {
+                new Claim("id", userId),
                 new Claim("email", user.Email),
                 new Claim("firstName", userModel.FirstName),
                 new Claim("lastName", userModel.LastName)
@@ -45,6 +46,7 @@ namespace tv_series_app.Services
                 claims: claims,
                 expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtSettings["expiryInMinutes"]))
             );
+
             return tokenOptions;
         }
     }

@@ -64,7 +64,7 @@ public class Authorizationtroller : ControllerBase
         }
         var signingCredentials = _jwtHandler.GetSigningCredentials();
         var userViewModel = _mapper.Map<UserViewModel>(user);
-        var claims = _jwtHandler.GetClaims(user, userViewModel);
+        var claims = _jwtHandler.GetClaims(user, userViewModel, user.Id);
         var tokenOptions = _jwtHandler.GenerateTokenOptions(signingCredentials, claims);
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         return Ok( new AuthResponse { IsAuthSuccessful = true, Token = token });
