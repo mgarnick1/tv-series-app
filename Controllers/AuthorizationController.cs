@@ -69,4 +69,15 @@ public class Authorizationtroller : ControllerBase
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         return Ok( new AuthResponse { IsAuthSuccessful = true, Token = token });
     }
+
+    [HttpGet]
+    [Route("user")]
+    public async Task<IActionResult> GetUser([FromQuery] string userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId);
+        if(user != null) {
+            return Ok(user);
+        }
+        return NotFound("User not found");
+    }
 }

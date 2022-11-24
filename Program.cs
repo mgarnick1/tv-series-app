@@ -46,7 +46,7 @@ builder.Services.AddAuthentication(opt =>
     {
         ValidateIssuer = true,
         ValidateAudience = true,
-        ValidateLifetime = true,
+        ValidateLifetime = false,
         ValidateIssuerSigningKey = true,
         ValidIssuer = jwtSettings["validIssuer"],
         ValidAudience = jwtSettings["validAudience"],
@@ -76,12 +76,15 @@ app.UseSwaggerUI();
 
 
 app.UseHttpsRedirection();
+app.UseRouting();
+app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseStaticFiles();
-app.UseRouting();
+app.UseCors(x => x
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader());
 
-app.UseCors();
 
 
 app.MapControllerRoute(
