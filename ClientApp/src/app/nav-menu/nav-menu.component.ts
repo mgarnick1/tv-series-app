@@ -1,5 +1,7 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiServiceService } from 'src/shared/services/api-service.service';
 import { AuthenticationService } from 'src/shared/services/authentication.service';
 import { LocalService } from 'src/shared/services/local-service.service';
 import { TokenExpirationService } from 'src/shared/services/token-expiration.service';
@@ -19,7 +21,8 @@ export class NavMenuComponent implements OnInit {
     private authService: AuthenticationService,
     private router: Router,
     private localService: LocalService,
-    private tokenService: TokenExpirationService
+    private tokenService: TokenExpirationService,
+    private apiService: ApiServiceService
   ) {}
   ngOnInit(): void {
     this.authService.authChanged.subscribe((res) => {
@@ -47,5 +50,14 @@ export class NavMenuComponent implements OnInit {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+  getUser() {
+    let params = new HttpParams();
+    params = params.append('userId', this.user.id);
+    this.apiService
+      .getItem('api/authorize/user', params)
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 }

@@ -16,6 +16,9 @@ namespace tv_series_app.Profiles
             ;
             CreateMap<User, UserViewModel>()
             ;
+
+            CreateMap<User, UserTVSeriesModel>()
+            ;
         }
     }
 }

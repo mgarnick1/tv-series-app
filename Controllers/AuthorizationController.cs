@@ -69,7 +69,7 @@ public class Authorizationtroller : ControllerBase
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         return Ok( new AuthResponse { IsAuthSuccessful = true, Token = token });
     }
-    
+
     [Authorize]
     [HttpGet]
     [Route("user")]
@@ -77,7 +77,7 @@ public class Authorizationtroller : ControllerBase
     {
         var user = await _userManager.FindByIdAsync(userId);
         if(user != null) {
-            return Ok(user);
+            return Ok(_mapper.Map<UserTVSeriesModel>(user));
         }
         return NotFound("User not found");
     }
