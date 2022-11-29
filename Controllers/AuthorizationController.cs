@@ -69,7 +69,8 @@ public class Authorizationtroller : ControllerBase
         var token = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
         return Ok( new AuthResponse { IsAuthSuccessful = true, Token = token });
     }
-
+    
+    [Authorize]
     [HttpGet]
     [Route("user")]
     public async Task<IActionResult> GetUser([FromQuery] string userId)
