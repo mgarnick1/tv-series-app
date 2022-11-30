@@ -10,9 +10,12 @@ import { HomeComponent } from './home/home.component';
 import { ErrorHandlerService } from 'src/shared/services/error-handler.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatButtonModule} from '@angular/material/button';
+import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.component';
 
 @NgModule({
-  declarations: [AppComponent, NavMenuComponent, HomeComponent],
+  declarations: [AppComponent, NavMenuComponent, HomeComponent, AddTvSeriesComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -29,6 +32,8 @@ import { MatTableModule } from '@angular/material/table';
     ]),
     BrowserAnimationsModule,
     MatTableModule,
+    MatDialogModule,
+    MatButtonModule
   ],
   providers: [
     {

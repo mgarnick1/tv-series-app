@@ -3,6 +3,9 @@ import { LocalService } from 'src/shared/services/local-service.service';
 import { UserService } from 'src/shared/services/user.service';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
 import { ActiveUser } from 'src/_interfaces/user/active-user.model';
+import { MatDialog } from '@angular/material/dialog';
+
+export class AddTvSeriesComponentDialog {}
 
 @Component({
   selector: 'app-home',
@@ -22,7 +25,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private storage: LocalService
+    private storage: LocalService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -33,5 +37,12 @@ export class HomeComponent implements OnInit {
         this.tvSeries = res.tvSeries as TVSeries[];
       });
     }
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(AddTvSeriesComponentDialog);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
