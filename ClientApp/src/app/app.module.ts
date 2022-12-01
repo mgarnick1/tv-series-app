@@ -12,6 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ReactiveFormsModule} from '@angular/forms';
+import { MatInputModule} from '@angular/material/input'
+import {MatIconModule} from '@angular/material/icon'
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.component';
 
 @NgModule({
@@ -20,6 +25,8 @@ import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.compone
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
+    FlexLayoutModule,
+    ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       {
@@ -33,7 +40,10 @@ import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.compone
     BrowserAnimationsModule,
     MatTableModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    MatIconModule,
+    MatFormFieldModule
   ],
   providers: [
     {

@@ -4,8 +4,8 @@ import { UserService } from 'src/shared/services/user.service';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
 import { ActiveUser } from 'src/_interfaces/user/active-user.model';
 import { MatDialog } from '@angular/material/dialog';
-
-export class AddTvSeriesComponentDialog {}
+import { AddTvSeriesComponent } from './add-tv-series/add-tv-series.component';
+import { TVUser } from 'src/_interfaces/user/tv-user.model';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +14,7 @@ export class AddTvSeriesComponentDialog {}
 })
 export class HomeComponent implements OnInit {
   tvSeries: TVSeries[] = [];
+  user: TVUser;
   displayedColumns: string[] = [
     'id',
     'showImage',
@@ -35,14 +36,21 @@ export class HomeComponent implements OnInit {
       const userObj = JSON.parse(user) as ActiveUser;
       this.userService.getUser(userObj.id).subscribe((res) => {
         this.tvSeries = res.tvSeries as TVSeries[];
+        this.user = res;
       });
     }
   }
   openDialog() {
-    const dialogRef = this.dialog.open(AddTvSeriesComponentDialog);
+    const dialogRef = this.dialog.open(AddTvSeriesComponent, {
+      width: '600px',
+      data: { tvSeries: this.tvSeries, userId: this.user.id },
+    });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
+      this.userService.getUser(this.user.id).subscribe((res) => {
+        this.tvSeries = res.tvSeries as TVSeries[];
+        this.user = res;
+      });
     });
   }
 }

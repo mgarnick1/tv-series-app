@@ -1,1 +1,42 @@
-<p>add-tv-series works!</p>
+<section fxLayoutAlign="end">
+  <button mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</section>
+<h1 mat-dialog-title fxLayoutAlign="center center">Add TV Series</h1>
+<mat-dialog-content [formGroup]="form">
+  <section fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex>
+      <label for="name">Show Name:</label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+  </section>
+  <section fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex>
+      <label for="showImage">Show Image:</label>
+      <input matInput formControlName="showImage" />
+    </mat-form-field>
+  </section>
+  <section fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex>
+      <label for="description">Description:</label>
+      <input matInput formControlName="description" />
+    </mat-form-field>
+  </section>
+  <section fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex>
+      <label for="genre">Genre:</label>
+      <input matInput formControlName="genre" />
+    </mat-form-field>
+  </section>
+  <section fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex>
+      <label for="rating">Rating:</label>
+      <input matInput type="number" formControlName="rating" />
+    </mat-form-field>
+  </section>
+</mat-dialog-content>
+<div mat-dialog-actions fxLayoutAlign="end">
+  <button mat-raised-button (click)="close()">Cancel</button>
+  <button mat-raised-button (click)="save()" color="primary">Save</button>
+</div>
