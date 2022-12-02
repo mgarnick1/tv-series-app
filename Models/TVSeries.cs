@@ -14,6 +14,6 @@ namespace tv_series_app.Models
         public double? Rating { get; protected set; }
         [StringLength(256)]
         public string? Genre { get; protected set; }
-        public virtual User? User { get; protected set; }
+        public virtual User? User { get;  set; }
     }
 }
