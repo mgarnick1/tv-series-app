@@ -11,12 +11,14 @@ namespace tv_series_app.Repositories
     public class TVSeriesRepository : ITVSeriesRepository
     {
         private DataContext _context;
+        private AutoMapper.IConfigurationProvider _config;
         public readonly IMapper _mapper;
 
-        public TVSeriesRepository(DataContext context, IMapper mapper)
+        public TVSeriesRepository(DataContext context, IMapper mapper, AutoMapper.IConfigurationProvider config )
         {
             _context = context;
             _mapper = mapper;
+            _config = config;
 
 
         }
@@ -27,20 +29,22 @@ namespace tv_series_app.Repositories
             if (exists == null)
             {
 
-                var mapped = _mapper.Map<TVSeries>(tvSeries);
-                var show = _context.TVSeries.Add(mapped);
+                var series =  new TVSeries();
+                series.Add(tvSeries);
+                var show = _context.TVSeries.Add(series);
                 await _context.SaveChangesAsync();
-                return mapped;
+                return series;
             }
             throw new ArgumentException("Bad Request, TVSeries exists");
         }
 
         public async Task<TVSeries> EditTVSeries(TVSeriesViewModel tvSeries)
         {
-            var mapped = _mapper.Map<TVSeries>(tvSeries);
-            _context.TVSeries.Update(mapped);
+            var series = new TVSeries();
+            series.Update(tvSeries);
+            _context.TVSeries.Update(series);
             await _context.SaveChangesAsync();
-            return mapped;
+            return series;
         }
 
         public async Task<TVSeries?> GetTVSeries(int id)
@@ -52,7 +56,7 @@ namespace tv_series_app.Repositories
         {
             return await _context.TVSeries
                 .AsNoTracking()
-                .Where(_ => _.User.Id == userId)
+                .Where(_ => _.UserKeyId == userId)
                 .ToListAsync();
         }
     }
