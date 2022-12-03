@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.AspNetCore.Identity;
 
 namespace tv_series_app.Models
@@ -14,6 +15,7 @@ namespace tv_series_app.Models
         public double? Rating { get; protected set; }
         [StringLength(256)]
         public string? Genre { get; protected set; }
-        public virtual User? User { get;  set; }
+        public string? UserKeyId { get; set; }
+        public User? User { get;  set; }
     }
 }

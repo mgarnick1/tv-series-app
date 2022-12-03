@@ -14,9 +14,19 @@ namespace tv_series_app.Models
         }
         public DbSet<TVSeries> TVSeries { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<TVSeries>()
+            .Property<string>("UserKeyId");
+
+            modelBuilder.Entity<TVSeries>()
+                .HasOne(tv => tv.User)
+                .WithMany(u => u.TVSeries)
+                .HasForeignKey(p => p.UserKeyId);
+
 
 
         }
