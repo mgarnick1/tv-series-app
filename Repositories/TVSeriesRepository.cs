@@ -14,7 +14,7 @@ namespace tv_series_app.Repositories
         private AutoMapper.IConfigurationProvider _config;
         public readonly IMapper _mapper;
 
-        public TVSeriesRepository(DataContext context, IMapper mapper, AutoMapper.IConfigurationProvider config )
+        public TVSeriesRepository(DataContext context, IMapper mapper, AutoMapper.IConfigurationProvider config)
         {
             _context = context;
             _mapper = mapper;
@@ -29,7 +29,7 @@ namespace tv_series_app.Repositories
             if (exists == null)
             {
 
-                var series =  new TVSeries();
+                var series = new TVSeries();
                 series.Add(tvSeries);
                 var show = _context.TVSeries.Add(series);
                 await _context.SaveChangesAsync();
@@ -52,12 +52,14 @@ namespace tv_series_app.Repositories
             return await _context.TVSeries.FindAsync(id);
         }
 
-        public async Task<List<TVSeries>> GetAllTVSeriesByUserId(string userId)
+        public async Task<List<TVSeriesViewModel>> GetAllTVSeriesByUserId(string userId)
         {
             return await _context.TVSeries
                 .AsNoTracking()
-                .Where(_ => _.UserKeyId == userId)
+                .ProjectTo<TVSeriesViewModel>(_config)
+                .Where(_ => _.UserId == userId)
                 .ToListAsync();
+
         }
     }
 }

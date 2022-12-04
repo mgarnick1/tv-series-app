@@ -11,6 +11,6 @@ namespace tv_series_app.ViewModels
         public string? LastName { get; set; }
         public string? Email { get; set; }
         public string? UserName { get; set; }
-        public List<TVSeries>? TVSeries { get; set; }
+        public List<TVSeriesViewModel>? TVSeries { get; set; }
     }
 }

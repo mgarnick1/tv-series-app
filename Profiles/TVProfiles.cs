@@ -21,7 +21,6 @@ namespace tv_series_app.Profiles
             ;
 
             CreateMap<TVSeries, TVSeriesViewModel>()
-                .ForMember(tvm => tvm.UserId, tv => tv.MapFrom(_ => _.User != null ? _.User.Id : null))
             ;
             CreateMap<TVSeriesViewModel, TVSeries>()
             ;

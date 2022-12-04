@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tv_series_app.Models;
 
@@ -11,9 +12,10 @@ using tv_series_app.Models;
 namespace tv_series_app.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221204022959_TVSeries_UserId")]
+    partial class TVSeries_UserId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -174,8 +176,8 @@ namespace tv_series_app.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int?>("Rating")
-                        .HasColumnType("int");
+                    b.Property<double?>("Rating")
+                        .HasColumnType("float");
 
                     b.Property<string>("ShowImage")
                         .HasColumnType("nvarchar(max)");

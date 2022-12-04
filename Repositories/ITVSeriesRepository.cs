@@ -9,7 +9,7 @@ namespace tv_series_app.Repositories
         Task<TVSeries> AddTVSeries(TVSeriesViewModel tvSeries);
         Task<TVSeries> EditTVSeries(TVSeriesViewModel tvSeries);
         Task<TVSeries?> GetTVSeries(int id);
-        Task<List<TVSeries>> GetAllTVSeriesByUserId(string userId);
+        Task<List<TVSeriesViewModel>> GetAllTVSeriesByUserId(string userId);
         
     }
 }

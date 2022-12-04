@@ -15,7 +15,7 @@ namespace tv_series_app.Models
             this.ShowImage = model.ShowImage;
             this.Rating = model.Rating;
             this.Genre = model.Genre;
-            this.UserKeyId = model.UserId;
+            this.UserId = model.UserId;
             return this;
         }
 
@@ -35,10 +35,10 @@ namespace tv_series_app.Models
         public string? Name { get; protected set; }
         public string? ShowImage { get; protected set; }
         public string? Description { get; protected set; }
-        public double? Rating { get; protected set; }
+        public int? Rating { get; protected set; }
         [StringLength(256)]
         public string? Genre { get; protected set; }
-        public string? UserKeyId { get; set; }
-        public User? User { get;  set; }
+        public string? UserId { get; set; }
+        public virtual User? User { get;  set; }
     }
 }

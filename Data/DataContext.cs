@@ -20,12 +20,12 @@ namespace tv_series_app.Models
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<TVSeries>()
-            .Property<string>("UserKeyId");
+            .Property<string>("UserId");
 
             modelBuilder.Entity<TVSeries>()
                 .HasOne(tv => tv.User)
                 .WithMany(u => u.TVSeries)
-                .HasForeignKey(p => p.UserKeyId);
+                .HasForeignKey(p => p.UserId);
 
 
 
