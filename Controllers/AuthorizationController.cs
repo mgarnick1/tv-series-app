@@ -6,6 +6,7 @@ using tv_series_app.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using tv_series_app.Services;
 using System.IdentityModel.Tokens.Jwt;
+using tv_series_app.Repositories;
 
 namespace tv_series_app.Controllers;
 
@@ -18,13 +19,15 @@ public class Authorizationtroller : ControllerBase
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager;
     private readonly JwtHandler _jwtHandler;
+    private readonly IUserRepository _userRepository;
 
-    public Authorizationtroller(ILogger<Authorizationtroller> logger, IMapper mapper, UserManager<User> userManager, JwtHandler jwtHandler)
+    public Authorizationtroller(ILogger<Authorizationtroller> logger, IMapper mapper, UserManager<User> userManager, JwtHandler jwtHandler, IUserRepository userRepository)
     {
         _logger = logger;
         _mapper = mapper;
         _userManager = userManager;
         _jwtHandler = jwtHandler;
+        _userRepository = userRepository;
     }
 
     [HttpGet]
@@ -75,10 +78,6 @@ public class Authorizationtroller : ControllerBase
     [Route("user")]
     public async Task<IActionResult> GetUser([FromQuery] string userId)
     {
-        var user = await _userManager.FindByIdAsync(userId);
-        if(user != null) {
-            return Ok(_mapper.Map<UserTVSeriesModel>(user));
-        }
-        return NotFound("User not found");
+       return Ok(await _userRepository.GetUser(userId));
     }
 }

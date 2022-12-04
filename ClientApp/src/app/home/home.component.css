@@ -3,6 +3,23 @@ table {
   max-height: 500px;
   overflow: auto;
 }
+
+th.mat-column-showImage {
+  padding-left: 24px;
+}
+
+table td {
+  padding-right: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 .button-container {
   margin: 2% 0;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+  object-fit: contain;
+  aspect-ratio: 1/1;
 }
