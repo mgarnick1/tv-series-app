@@ -39,10 +39,10 @@
 </section>
 <section *ngIf="!user" class="missing-info background-image">
 </section>
-<section class="missing-info" *ngIf="user?.id && !user?.tvSeries?.length">
+<section class="missing-info text-light" *ngIf="user?.id && !user?.tvSeries?.length">
   <h1> No Shows, please select Add Show </h1>
   <section class="button-container">
-    <button mat-raised-button class="add-btn"(click)="openDialog()">
+    <button mat-raised-button class="add-btn text-light"(click)="openDialog()">
       Add Show
     </button>
 </section>
