@@ -40,3 +40,9 @@ img {
   opacity: 0.2;
   z-index: 3;
 }
+
+
+.mat-button, .mat-raised-button{
+  background-color: #1861ac;
+  border: #1861ac;
+} 

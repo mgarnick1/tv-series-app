@@ -1,9 +1,9 @@
 <header>
   <nav
-    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3"
+    class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navbar-dark border-bottom border-light box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand" [routerLink]="['/']">Favorite TV Series Shows</a>
+      <a class="navbar-brand text-light" [routerLink]="['/']">Favorite TV Series Shows</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -50,7 +50,7 @@
           >
             <li class="nav-item">
               <a
-                class="nav-link"
+                class="nav-link text-light"
                 [routerLink]="['/authentication/login']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
@@ -59,7 +59,7 @@
             </li>
             <li class="nav-item">
               <a
-                class="nav-link"
+                class="nav-link text-light"
                 [routerLink]="['/authentication/register']"
                 routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }"
@@ -72,12 +72,11 @@
             class="navbar-nav mr-auto mt-2 mt-lg-0"
           >
             <li class="nav-item" *ngIf="user && user.firstName">
-              <button class="btn btn-link" style="color: #969696; text-decoration: none" (click)="getUser()">Hello {{user.firstName}}</button>
+              <button class="btn btn-link text-light text-decoration-none" (click)="getUser()">Hello {{user.firstName}}</button>
             </li>
             <li class="nav-item">
               <button
-                class="btn btn-link"
-                style="color: #969696; text-decoration: none"
+                class="btn btn-link text-light text-decoration-none"
                 (click)="logout()"
               >
                 Logout

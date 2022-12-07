@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
@@ -12,6 +12,7 @@ export class AddTvSeriesComponentDialog {
   selector: 'app-add-tv-series',
   templateUrl: './add-tv-series.component.html',
   styleUrls: ['./add-tv-series.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AddTvSeriesComponent implements OnInit {
   form: FormGroup;
