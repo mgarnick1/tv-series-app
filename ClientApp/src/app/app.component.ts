@@ -27,4 +27,11 @@ export class AppComponent implements OnInit {
   setUser(event: ActiveUser) {
     this.user = event
   }
+
+  reloadPageLogout(event: boolean) {
+    if(!event) {
+      window.location.reload()
+    }
+  }
+
 }

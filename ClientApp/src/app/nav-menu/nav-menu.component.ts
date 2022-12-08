@@ -18,6 +18,7 @@ export class NavMenuComponent implements OnInit {
   isExpanded = false;
   @Input() user: ActiveUser;
   @Output() newUser = new EventEmitter<ActiveUser>();
+  @Output() logOutReload = new EventEmitter<boolean>();
   constructor(
     private authService: AuthenticationService,
     private router: Router,
@@ -43,6 +44,7 @@ export class NavMenuComponent implements OnInit {
     this.authService.logout();
     this.isUserAuthenticated = false;
     this.localService.clearData();
+    this.logOutReload.emit(false)
     this.router.navigate(['/']);
   };
   collapse() {
