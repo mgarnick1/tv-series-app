@@ -38,13 +38,19 @@ namespace tv_series_app.Repositories
             throw new ArgumentException("Bad Request, TVSeries exists");
         }
 
-        public async Task<TVSeries> EditTVSeries(TVSeriesViewModel tvSeries)
+        public async Task<TVSeries?> EditTVSeries(TVSeriesViewModel tvSeries)
         {
-            var series = new TVSeries();
-            series.Update(tvSeries);
-            _context.TVSeries.Update(series);
-            await _context.SaveChangesAsync();
-            return series;
+            var series = await _context.TVSeries
+                .AsNoTracking().FirstOrDefaultAsync(_ => _.Id == tvSeries.Id);
+            if (series != null)
+            {
+
+                series.Update(tvSeries);
+                _context.TVSeries.Update(series);
+                await _context.SaveChangesAsync();
+                return series;
+            }
+            return null;
         }
 
         public async Task<TVSeries?> GetTVSeries(int id)

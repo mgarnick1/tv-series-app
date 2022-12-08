@@ -24,6 +24,8 @@ export class AddTvSeriesComponent implements OnInit {
   genre: string;
   rating: number;
 
+  isNew: boolean = true;
+
   constructor(
     public dialogRef: MatDialogRef<AddTvSeriesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddTvSeriesComponentDialog,
@@ -33,6 +35,7 @@ export class AddTvSeriesComponent implements OnInit {
 
   ngOnInit(): void {
     this.userId = this.data.userId;
+    this.isNew = this.data?.tvSeries === null;
     this.form = this.fb.group({
       name: [this.name, []],
       showImage: [this.showImage, []],
@@ -40,6 +43,15 @@ export class AddTvSeriesComponent implements OnInit {
       genre: [this.genre, []],
       rating: [this.rating, []],
     });
+    if (!this.isNew && this.data?.tvSeries?.id) {
+      this.form.setValue({
+        name: this.data.tvSeries.name,
+        showImage: this.data.tvSeries.showImage,
+        description: this.data.tvSeries.description,
+        genre: this.data.tvSeries.genre,
+        rating: this.data.tvSeries.rating,
+      });
+    }
   }
   close() {
     this.dialogRef.close();
@@ -48,8 +60,15 @@ export class AddTvSeriesComponent implements OnInit {
     console.log(this.form.value);
     const tvSeries = this.form.value as TVSeries;
     tvSeries.userId = this.userId;
-    this.tvService.createTVSeries(tvSeries).subscribe((res) => {
-      this.dialogRef.close();
-    });
+    if (this.isNew) {
+      this.tvService.createTVSeries(tvSeries).subscribe((res) => {
+        this.dialogRef.close();
+      });
+    } else {
+      tvSeries.id = this.data.tvSeries.id;
+      this.tvService.editTVSeries(tvSeries).subscribe((res) => {
+        this.dialogRef.close();
+      });
+    }
   }
 }

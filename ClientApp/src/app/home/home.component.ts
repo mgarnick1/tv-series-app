@@ -43,7 +43,21 @@ export class HomeComponent implements OnInit {
   openDialog() {
     const dialogRef = this.dialog.open(AddTvSeriesComponent, {
       width: '600px',
-      data: { tvSeries: this.tvSeries, userId: this.user.id },
+      data: { tvSeries: null, userId: this.user.id },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.userService.getUser(this.user.id).subscribe((res) => {
+        this.tvSeries = res.tvSeries as TVSeries[];
+        this.user = res;
+      });
+    });
+  }
+
+  editTvSeries(tvSeries: TVSeries) {
+    const dialogRef = this.dialog.open(AddTvSeriesComponent, {
+      width: '600px',
+      data: { tvSeries: tvSeries, userId: this.user.id },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

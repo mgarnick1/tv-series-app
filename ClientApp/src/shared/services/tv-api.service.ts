@@ -15,4 +15,9 @@ export class TvApiService {
     let params = new HttpParams();
     return this.apiService.postItem(`${this.url}/add`, tvSeries, params)
   }
+
+  editTVSeries(tvSeries: TVSeries) {
+    let params = new HttpParams();
+    return this.apiService.editItem(`${this.url}/edit`, tvSeries, params)
+  }
 }
