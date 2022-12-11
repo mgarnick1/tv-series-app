@@ -13,9 +13,7 @@ import { TokenExpirationService } from './token-expiration.service';
   providedIn: 'root',
 })
 export class ApiServiceService {
-  httpOptions = new HttpHeaders({
-    'Content-Type': 'application/json',
-  });
+  httpOptions = new HttpHeaders();
   baseUrl: string = 'https://localhost:7091';
 
   constructor(
@@ -87,7 +85,21 @@ export class ApiServiceService {
     throw new Error('Invalid Token');
   }
 
-  private handleError(error: HttpErrorResponse) { 
+  uploadFile(url: string, body?: FormData, options?: any) {
+    let headers = this.validateToken();
+    if (headers) {
+      return this.http
+        .post(`${this.baseUrl}${url}`, body, {
+          params: options,
+          headers: headers,
+          responseType: 'text'
+        })
+        .pipe(catchError(this.handleError));
+    }
+    throw new Error('Invalid Token');
+  }
+
+  private handleError(error: HttpErrorResponse) {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);

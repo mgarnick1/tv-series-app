@@ -3,7 +3,9 @@
     <mat-icon>close</mat-icon>
   </button>
 </section>
-<h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">Add TV Series</h1>
+<h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">
+  Add TV Series
+</h1>
 <mat-dialog-content [formGroup]="form" class="bg-grey text-light">
   <section fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex>
@@ -13,8 +15,18 @@
   </section>
   <section fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex>
-      <label for="showImage">Show Image:</label>
+      <label for="showImage"
+        >Show Image:<button mat-icon-button matPrefix (click)="f_input.click()">
+          <mat-icon>attach_file</mat-icon>
+        </button></label
+      >
       <input matInput formControlName="showImage" />
+      <input
+        type="file"
+        hidden
+        #f_input
+        (change)="handleUpload(f_input.files)"
+      />
     </mat-form-field>
   </section>
   <section fxLayout="row" fxLayoutAlign="center center">

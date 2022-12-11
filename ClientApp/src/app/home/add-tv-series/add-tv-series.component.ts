@@ -71,4 +71,17 @@ export class AddTvSeriesComponent implements OnInit {
       });
     }
   }
+
+  handleUpload(file: any) {
+    if (file[0]) {
+      const fileName = file[0].name;
+      let formData = new FormData();
+      formData.append('image', file[0], fileName);
+      this.tvService
+        .uploadImageGetUrl(formData, this.userId)
+        .subscribe((res) => {
+          this.form.patchValue({ showImage: res });
+        });
+    }
+  }
 }

@@ -23,19 +23,19 @@ namespace tv_series_app.Repositories
             _config = config;
         }
 
-        public async Task<string> UploadFileRetrieveLink(string localFilePath)
+        public async Task<string> UploadFileRetrieveLink(Stream content, string fileName, string userId)
         {
             var connectionString = _config["BlobContainer:ConnectionString"];
             BlobServiceClient blobServiceClient = new BlobServiceClient(connectionString);
-            string fileName = Path.GetFileName(localFilePath);
-            BlobContainerClient containerClient = blobServiceClient.CreateBlobContainer("tvSeriesContainer");
+
+            BlobContainerClient containerClient = blobServiceClient.GetBlobContainerClient(userId);
+            containerClient.CreateIfNotExists(PublicAccessType.Blob);
             BlobClient blobClient = containerClient.GetBlobClient(fileName);
 
-            await blobClient.UploadAsync(localFilePath, true);
+            await blobClient.UploadAsync(content, true);
 
-            BlobDownloadResult downloadResult = await blobClient.DownloadContentAsync();
-            string downloadedData = downloadResult.Content.ToString();
-            return downloadedData;
+            
+            return blobClient.Uri.OriginalString;
         }
     }
 }
