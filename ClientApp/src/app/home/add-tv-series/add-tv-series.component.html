@@ -4,7 +4,7 @@
   </button>
 </section>
 <h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">
-  Add TV Series
+  {{ isNew ? 'Add TV Series' : 'Edit TV Series' }}
 </h1>
 <mat-dialog-content [formGroup]="form" class="bg-grey text-light">
   <section fxLayout="row" fxLayoutAlign="center center">
