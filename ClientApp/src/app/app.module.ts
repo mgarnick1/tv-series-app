@@ -16,11 +16,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MatInputModule} from '@angular/material/input'
 import {MatIconModule} from '@angular/material/icon'
+import {MatCardModule} from '@angular/material/card'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.component';
+import { TvSeriesCardComponent } from './home/tv-series-card/tv-series-card.component';
 
 @NgModule({
-  declarations: [AppComponent, NavMenuComponent, HomeComponent, AddTvSeriesComponent],
+  declarations: [AppComponent, NavMenuComponent, HomeComponent, AddTvSeriesComponent, TvSeriesCardComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
@@ -43,7 +45,8 @@ import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.compone
     MatButtonModule,
     MatInputModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatCardModule
   ],
   providers: [
     {

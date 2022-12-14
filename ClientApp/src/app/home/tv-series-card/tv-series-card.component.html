@@ -1,0 +1,14 @@
+<mat-card class="tv-card bg-dark">
+  <mat-card-header>
+    <mat-card-title class="text-light">{{ tvSeries.name }}</mat-card-title>
+  </mat-card-header>
+  <img mat-card-image [src]="tvSeries.showImage" alt="tvSeries.name" />
+  <mat-card-content>
+    <p class="text-light">
+      {{ tvSeries.description }}
+    </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-button (click)="edit(tvSeries)" class="text-light">Edit Series</button>
+  </mat-card-actions>
+</mat-card>

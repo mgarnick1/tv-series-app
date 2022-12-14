@@ -15,14 +15,14 @@ import { TVUser } from 'src/_interfaces/user/tv-user.model';
 export class HomeComponent implements OnInit {
   tvSeries: TVSeries[] = [];
   user: TVUser;
-  displayedColumns: string[] = [
-    'id',
-    'showImage',
-    'name',
-    'description',
-    'rating',
-    'genre',
-  ];
+  // displayedColumns: string[] = [
+  //   'id',
+  //   'showImage',
+  //   'name',
+  //   'description',
+  //   'rating',
+  //   'genre',
+  // ];
 
   constructor(
     private userService: UserService,
