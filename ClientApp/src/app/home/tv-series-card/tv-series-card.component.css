@@ -12,3 +12,8 @@ p {
   white-space: nowrap;
   text-overflow: ellipsis;
 }
+
+
+.network-image {
+  background-size: cover;
+}

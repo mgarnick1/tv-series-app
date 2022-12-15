@@ -4,6 +4,7 @@
   [title]="tvSeries.description"
 >
   <mat-card-header>
+    <img mat-card-avatar [src]="networkLogo(tvSeries.network)" class="network-image" />
     <mat-card-title class="text-light">{{ tvSeries.name }}</mat-card-title>
   </mat-card-header>
   <img mat-card-image [src]="tvSeries.showImage" alt="tvSeries.name" />
