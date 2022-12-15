@@ -1,0 +1,11 @@
+<button
+  mat-icon-button
+  [color]="color"
+  class="size"
+  *ngFor="let ratingId of ratingArr; index as i"
+  [id]="'star_' + i"
+>
+  <mat-icon>
+    {{ showIcon(i) }}
+  </mat-icon>
+</button>

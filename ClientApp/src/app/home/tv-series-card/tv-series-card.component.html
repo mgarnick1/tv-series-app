@@ -1,11 +1,21 @@
-<mat-card class="tv-card bg-dark pointer" (click)="edit(tvSeries)">
+<mat-card
+  class="tv-card bg-dark pointer"
+  (click)="edit(tvSeries)"
+  [title]="tvSeries.description"
+>
   <mat-card-header>
     <mat-card-title class="text-light">{{ tvSeries.name }}</mat-card-title>
   </mat-card-header>
   <img mat-card-image [src]="tvSeries.showImage" alt="tvSeries.name" />
   <mat-card-content>
-    <p class="text-light pointer" [title]="tvSeries.description">
-      {{ tvSeries.description }}
-    </p>
+    <div>
+      <app-tv-rating-star
+        [rating]="tvSeries.rating"
+        [starCount]="starCount"
+      ></app-tv-rating-star>
+      <p class="text-light pointer">
+        {{ tvSeries.description }}
+      </p>
+    </div>
   </mat-card-content>
 </mat-card>

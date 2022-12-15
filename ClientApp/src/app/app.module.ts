@@ -20,9 +20,10 @@ import {MatCardModule} from '@angular/material/card'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AddTvSeriesComponent } from './home/add-tv-series/add-tv-series.component';
 import { TvSeriesCardComponent } from './home/tv-series-card/tv-series-card.component';
+import { TvRatingStarComponent } from './home/tv-rating-star/tv-rating-star.component';
 
 @NgModule({
-  declarations: [AppComponent, NavMenuComponent, HomeComponent, AddTvSeriesComponent, TvSeriesCardComponent],
+  declarations: [AppComponent, NavMenuComponent, HomeComponent, AddTvSeriesComponent, TvSeriesCardComponent, TvRatingStarComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

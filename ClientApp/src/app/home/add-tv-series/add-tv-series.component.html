@@ -44,7 +44,7 @@
   <section fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex>
       <label for="rating">Rating:</label>
-      <input matInput type="number" formControlName="rating" />
+      <input matInput type="number" formControlName="rating" min="0" max="5" />
     </mat-form-field>
   </section>
 </mat-dialog-content>

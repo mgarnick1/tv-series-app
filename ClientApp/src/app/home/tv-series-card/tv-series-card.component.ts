@@ -9,6 +9,7 @@ import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
 export class TvSeriesCardComponent implements OnInit {
   @Input() tvSeries: TVSeries;
   @Output() selectTvSeries = new EventEmitter<TVSeries>();
+  starCount: number = 5;
   constructor() {}
 
   ngOnInit(): void {}
