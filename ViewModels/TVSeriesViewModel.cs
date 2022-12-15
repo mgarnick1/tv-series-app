@@ -12,5 +12,6 @@ namespace tv_series_app.ViewModels
         public int Rating { get; set; }
         public string? UserId { get; set; }
         public string? Genre { get; set; }
+        public string? Network { get; set; }
     }
 }
