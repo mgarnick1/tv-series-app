@@ -19,7 +19,7 @@ export class TvSeriesCardComponent implements OnInit {
   }
 
   networkLogo(network: string): string {
-    const networkLowercase = network.toLowerCase();
+    const networkLowercase = network?.toLowerCase();
     let logos: Record<string, string> = {
       'sci-fi channel':
         'https://deadline.com/wp-content/uploads/2017/05/syfy-new-black-logo-featured.jpg',

@@ -15,14 +15,7 @@ import { TVUser } from 'src/_interfaces/user/tv-user.model';
 export class HomeComponent implements OnInit {
   tvSeries: TVSeries[] = [];
   user: TVUser;
-  // displayedColumns: string[] = [
-  //   'id',
-  //   'showImage',
-  //   'name',
-  //   'description',
-  //   'rating',
-  //   'genre',
-  // ];
+  fetching: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -33,11 +26,13 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     const user = this.storage.getData('user');
     if (user) {
+      this.fetching = true;
       const userObj = JSON.parse(user) as ActiveUser;
       this.userService.getUser(userObj.id).subscribe((res) => {
         this.tvSeries = res.tvSeries as TVSeries[];
         this.user = res;
       });
+      this.fetching = false;
     }
   }
   openDialog() {
@@ -47,10 +42,12 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.fetching = true;
       this.userService.getUser(this.user.id).subscribe((res) => {
         this.tvSeries = res.tvSeries as TVSeries[];
         this.user = res;
       });
+      this.fetching = false;
     });
   }
 
@@ -61,10 +58,12 @@ export class HomeComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
+      this.fetching = true;
       this.userService.getUser(this.user.id).subscribe((res) => {
         this.tvSeries = res.tvSeries as TVSeries[];
         this.user = res;
       });
+      this.fetching = false;
     });
   }
 }

@@ -4,9 +4,16 @@
   </button>
 </section>
 <h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">
-  {{ isNew ? 'Add TV Series' : 'Edit TV Series' }}
+  {{ isNew ? "Add TV Series" : "Edit TV Series" }}
 </h1>
 <mat-dialog-content [formGroup]="form" class="bg-grey text-light">
+  <mat-progress-spinner
+    *ngIf="fetching"
+    class="absolute-center"
+    color="primary"
+    mode="indeterminate"
+  >
+  </mat-progress-spinner>
   <section fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex>
       <label for="name">Show Name:</label>

@@ -13,6 +13,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {ReactiveFormsModule} from '@angular/forms';
 import { MatInputModule} from '@angular/material/input'
 import {MatIconModule} from '@angular/material/icon'
@@ -47,7 +48,8 @@ import { TvRatingStarComponent } from './home/tv-rating-star/tv-rating-star.comp
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {
