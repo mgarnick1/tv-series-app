@@ -1,5 +1,6 @@
 <body>
   <app-nav-menu [user]="user" (newUser)="setUser($event)" (logOutReload)="reloadPageLogout($event)"></app-nav-menu>
+  <app-spinner></app-spinner>
   <div class="container">
     <router-outlet></router-outlet>
   </div>
