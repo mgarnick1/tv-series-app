@@ -23,7 +23,7 @@ export class AddTvSeriesComponent implements OnInit {
   description: string;
   genre: string;
   rating: number;
-  fetching: boolean = false;
+  network: string;
 
   isNew: boolean = true;
 
@@ -43,6 +43,7 @@ export class AddTvSeriesComponent implements OnInit {
       description: [this.description, []],
       genre: [this.genre, []],
       rating: [this.rating, []],
+      network: [this.network, []],
     });
     if (!this.isNew && this.data?.tvSeries?.id) {
       this.form.setValue({
@@ -51,6 +52,7 @@ export class AddTvSeriesComponent implements OnInit {
         description: this.data.tvSeries.description,
         genre: this.data.tvSeries.genre,
         rating: this.data.tvSeries.rating,
+        network: this.data.tvSeries.network
       });
     }
   }
@@ -62,16 +64,13 @@ export class AddTvSeriesComponent implements OnInit {
     const tvSeries = this.form.value as TVSeries;
     tvSeries.userId = this.userId;
     if (this.isNew) {
-      this.fetching = true;
       this.tvService.createTVSeries(tvSeries).subscribe((res) => {
-        this.fetching = false;
         this.dialogRef.close();
       });
     } else {
-      this.fetching = true;
+      // this.fetching = true;
       tvSeries.id = this.data.tvSeries.id;
       this.tvService.editTVSeries(tvSeries).subscribe((res) => {
-        this.fetching = false
         this.dialogRef.close();
       });
     }

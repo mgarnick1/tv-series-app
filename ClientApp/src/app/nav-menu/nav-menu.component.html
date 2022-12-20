@@ -3,7 +3,7 @@
     class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light navbar-dark border-bottom border-light box-shadow mb-3"
   >
     <div class="container">
-      <a class="navbar-brand text-light" [routerLink]="['/']">Favorite TV Series Shows</a>
+      <a class="navbar-brand text-light" [routerLink]="['/']">Favorite TV Series</a>
       <button
         class="navbar-toggler"
         type="button"
@@ -19,30 +19,6 @@
         class="navbar-collapse collapse d-sm-inline-flex justify-content-end"
         [ngClass]="{ show: isExpanded }"
       >
-        <!-- <ul class="navbar-nav flex-grow">
-          <li
-            class="nav-item"
-            [routerLinkActive]="['link-active']"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
-            >
-          </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/authentication/register']"
-              >Register</a
-            >
-          </li>
-        </ul> -->
         <form class="form-inline my-2 my-lg-0">
           <ul
             *ngIf="!isUserAuthenticated"

@@ -7,5 +7,6 @@ export interface TVSeries {
     userId: string;
     genre: string;
     network: string;
+    networkLogoUrl: string;
 
 }

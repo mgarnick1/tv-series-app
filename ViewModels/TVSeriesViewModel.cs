@@ -13,5 +13,9 @@ namespace tv_series_app.ViewModels
         public string? UserId { get; set; }
         public string? Genre { get; set; }
         public string? Network { get; set; }
+        public string? NetworkLogoUrl { get; set; }
+        public NetworkLogo? NetworkLogo { get; set; }
+
+
     }
 }

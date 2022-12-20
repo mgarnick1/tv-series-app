@@ -44,6 +44,8 @@ namespace tv_series_app.Models
         public virtual User? User { get;  set; }
         [StringLength(32)]
         public string? Network { get; set; }
+        public virtual NetworkLogo? NetworkLogo { get; set; }
+        
 
     }
 }

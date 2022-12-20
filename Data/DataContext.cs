@@ -13,6 +13,7 @@ namespace tv_series_app.Models
 
         }
         public DbSet<TVSeries> TVSeries { get; set; }
+        public DbSet<NetworkLogo> NetworkLogos {get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -27,7 +28,13 @@ namespace tv_series_app.Models
                 .WithMany(u => u.TVSeries)
                 .HasForeignKey(p => p.UserId);
 
+            modelBuilder.Entity<NetworkLogo>()
+                .Property<string>("UserId");
 
+            modelBuilder.Entity<NetworkLogo>()
+                .HasOne(tv => tv.User)
+                .WithMany(u => u.NetworkLogos)
+                .HasForeignKey(p => p.UserId);
 
         }
     }

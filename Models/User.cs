@@ -9,5 +9,7 @@ public class User : IdentityUser
     public string? LastName { get; set; }
     public string? Password { get; set; }
     public virtual List<TVSeries>? TVSeries { get; set; }
+    public virtual List<NetworkLogo>? NetworkLogos { get; set; }
+    
 
 }
