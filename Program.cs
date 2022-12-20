@@ -59,6 +59,7 @@ builder.Services.AddAuthentication(opt =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITVSeriesRepository, TVSeriesRepository>();
 builder.Services.AddScoped<IFileUploadRepsitory, FileUploadRepository>();
+builder.Services.AddScoped<INetworkLogoRepository, NetworkLogoRepository>();
 builder.Services.AddScoped<JwtHandler>();
 
 

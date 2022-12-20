@@ -26,6 +26,9 @@ namespace tv_series_app.Profiles
             ;
             CreateMap<TVSeriesViewModel, TVSeries>()
             ;
+
+            CreateMap<NetworkLogo, NetworkLogoViewModel>()
+            ;
         }
     }
 }
