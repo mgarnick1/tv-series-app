@@ -1,7 +1,9 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NetworkService } from 'src/shared/services/network.service';
 import { TvApiService } from 'src/shared/services/tv-api.service';
+import { NetworkLogo } from 'src/_interfaces/tv-series/network-logos.model';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
 
 export class AddTvSeriesComponentDialog {
@@ -24,6 +26,8 @@ export class AddTvSeriesComponent implements OnInit {
   genre: string;
   rating: number;
   network: string;
+  networks: NetworkLogo[] = [];
+  networkSelected: NetworkLogo | undefined;
 
   isNew: boolean = true;
 
@@ -31,11 +35,13 @@ export class AddTvSeriesComponent implements OnInit {
     public dialogRef: MatDialogRef<AddTvSeriesComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AddTvSeriesComponentDialog,
     private fb: FormBuilder,
+    private networkService: NetworkService,
     private tvService: TvApiService
   ) {}
 
   ngOnInit(): void {
     this.userId = this.data.userId;
+
     this.isNew = this.data?.tvSeries === null;
     this.form = this.fb.group({
       name: [this.name, []],
@@ -52,10 +58,17 @@ export class AddTvSeriesComponent implements OnInit {
         description: this.data.tvSeries.description,
         genre: this.data.tvSeries.genre,
         rating: this.data.tvSeries.rating,
-        network: this.data.tvSeries.network
+        network: this.data.tvSeries.network,
       });
     }
   }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.getUserNetworks(this.userId);
+    }, 0);
+  }
+
   close() {
     this.dialogRef.close();
   }
@@ -63,12 +76,16 @@ export class AddTvSeriesComponent implements OnInit {
     console.log(this.form.value);
     const tvSeries = this.form.value as TVSeries;
     tvSeries.userId = this.userId;
+    this.networkSelected = this.networks.find((n) => n.id === this.form.value.network)
+    if(this.networkSelected) {
+      tvSeries.network = this.networkSelected.networkName;
+      tvSeries.networkLogo = this.networkSelected
+    }
     if (this.isNew) {
       this.tvService.createTVSeries(tvSeries).subscribe((res) => {
         this.dialogRef.close();
       });
     } else {
-      // this.fetching = true;
       tvSeries.id = this.data.tvSeries.id;
       this.tvService.editTVSeries(tvSeries).subscribe((res) => {
         this.dialogRef.close();
@@ -88,4 +105,18 @@ export class AddTvSeriesComponent implements OnInit {
         });
     }
   }
+
+  async getUserNetworks(userId: string) {
+    this.networks = await this.networkService
+      .getNetworkLogos(userId)
+      .toPromise();
+    this.networkSelected = this.networks.find(
+      (n) => n.networkName === this.data.tvSeries?.network
+    );
+    if (this.networkSelected) {
+      this.form.patchValue({ network: this.networkSelected.id });
+    }
+  }
+
+  addNetwork() {}
 }

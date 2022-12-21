@@ -17,6 +17,7 @@ namespace tv_series_app.Models
             this.Genre = model.Genre;
             this.UserId = model.UserId;
             this.Network = model.Network;
+            this.NetworkLogo = model.NetworkLogo;
             return this;
         }
 
@@ -28,6 +29,7 @@ namespace tv_series_app.Models
             this.Rating = model.Rating;
             this.Genre = model.Genre;
             this.Network = model.Network;
+            this.NetworkLogo = model.NetworkLogo;
             return this;
         }
 

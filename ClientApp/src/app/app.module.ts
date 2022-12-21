@@ -24,6 +24,7 @@ import { TvSeriesCardComponent } from './home/tv-series-card/tv-series-card.comp
 import { TvRatingStarComponent } from './home/tv-rating-star/tv-rating-star.component';
 import { SpinnerComponent } from './home/spinner/spinner.component';
 import { LoadingInterceptor } from 'src/shared/services/loading.interceptor';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { LoadingInterceptor } from 'src/shared/services/loading.interceptor';
     MatFormFieldModule,
     MatCardModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ],
   providers: [
     {

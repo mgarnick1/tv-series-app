@@ -48,9 +48,13 @@
     </mat-form-field>
   </section>
   <section fxLayout="row" fxLayoutAlign="center center">
-    <mat-form-field fxFlex>
-      <label for="rating">Network:</label>
-      <input matInput formControlName="network" />
+    <mat-form-field fxFlex class="text-light">
+      <label for="network">Network:</label>
+      <mat-select formControlName="network" class="text-light" required>
+        <mat-option *ngFor="let net of networks" [value]="net.id" class="bg-dark text-light">
+          {{ net.networkName }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </section>
 </mat-dialog-content>

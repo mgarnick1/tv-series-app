@@ -1,3 +1,5 @@
+import { NetworkLogo } from "./network-logos.model";
+
 export interface TVSeries {
     id: number,
     name: string;
@@ -7,6 +9,6 @@ export interface TVSeries {
     userId: string;
     genre: string;
     network: string;
+    networkLogo: NetworkLogo;
     networkLogoUrl: string;
-
 }
