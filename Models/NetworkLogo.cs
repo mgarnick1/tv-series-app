@@ -13,5 +13,6 @@ namespace tv_series_app.Models
         public string? LogoUrl { get; set; }
         public string? UserId { get; set; }
         public virtual User? User { get; set; }
+        public virtual List<TVSeries>? TVSeries { get; set; }
     }
 }

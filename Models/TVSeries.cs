@@ -16,8 +16,7 @@ namespace tv_series_app.Models
             this.Rating = model.Rating;
             this.Genre = model.Genre;
             this.UserId = model.UserId;
-            this.Network = model.Network;
-            this.NetworkLogo = model.NetworkLogo;
+            this.NetworkId = model.NetworkId;
             return this;
         }
 
@@ -28,8 +27,7 @@ namespace tv_series_app.Models
             this.ShowImage = model.ShowImage;
             this.Rating = model.Rating;
             this.Genre = model.Genre;
-            this.Network = model.Network;
-            this.NetworkLogo = model.NetworkLogo;
+            this.NetworkId = model.NetworkId;
             return this;
         }
 
@@ -45,7 +43,7 @@ namespace tv_series_app.Models
         public string? UserId { get; set; }
         public virtual User? User { get;  set; }
         [StringLength(32)]
-        public string? Network { get; set; }
+        public int? NetworkId { get; set; }
         public virtual NetworkLogo? NetworkLogo { get; set; }
         
 

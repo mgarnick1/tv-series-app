@@ -24,9 +24,17 @@ namespace tv_series_app.Models
             .Property<string>("UserId");
 
             modelBuilder.Entity<TVSeries>()
+                .Property<int?>("NetworkId");
+
+            modelBuilder.Entity<TVSeries>()
                 .HasOne(tv => tv.User)
                 .WithMany(u => u.TVSeries)
                 .HasForeignKey(p => p.UserId);
+
+            modelBuilder.Entity<TVSeries>()
+                .HasOne(n => n.NetworkLogo)
+                .WithMany(u => u.TVSeries)
+                .HasForeignKey(n => n.NetworkId);
 
             modelBuilder.Entity<NetworkLogo>()
                 .Property<string>("UserId");
@@ -35,6 +43,8 @@ namespace tv_series_app.Models
                 .HasOne(tv => tv.User)
                 .WithMany(u => u.NetworkLogos)
                 .HasForeignKey(p => p.UserId);
+
+
 
         }
     }

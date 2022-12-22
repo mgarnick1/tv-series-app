@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using tv_series_app.Models;
 
@@ -11,9 +12,10 @@ using tv_series_app.Models;
 namespace tv_series_app.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221222033515_TVSeries_NetworkLogos_FK")]
+    partial class TVSeries_NetworkLogos_FK
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -215,7 +217,9 @@ namespace tv_series_app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NetworkId");
+                    b.HasIndex("NetworkId")
+                        .IsUnique()
+                        .HasFilter("[NetworkId] IS NOT NULL");
 
                     b.HasIndex("UserId");
 
@@ -359,8 +363,8 @@ namespace tv_series_app.Migrations
             modelBuilder.Entity("tv_series_app.Models.TVSeries", b =>
                 {
                     b.HasOne("tv_series_app.Models.NetworkLogo", "NetworkLogo")
-                        .WithMany("TVSeries")
-                        .HasForeignKey("NetworkId");
+                        .WithOne("TVSeries")
+                        .HasForeignKey("tv_series_app.Models.TVSeries", "NetworkId");
 
                     b.HasOne("tv_series_app.Models.User", "User")
                         .WithMany("TVSeries")

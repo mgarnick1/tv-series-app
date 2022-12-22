@@ -25,7 +25,7 @@ export class AddTvSeriesComponent implements OnInit {
   description: string;
   genre: string;
   rating: number;
-  network: string;
+  networkId: number;
   networks: NetworkLogo[] = [];
   networkSelected: NetworkLogo | undefined;
 
@@ -49,7 +49,7 @@ export class AddTvSeriesComponent implements OnInit {
       description: [this.description, []],
       genre: [this.genre, []],
       rating: [this.rating, []],
-      network: [this.network, []],
+      networkId: [this.networkId, []],
     });
     if (!this.isNew && this.data?.tvSeries?.id) {
       this.form.setValue({
@@ -58,7 +58,7 @@ export class AddTvSeriesComponent implements OnInit {
         description: this.data.tvSeries.description,
         genre: this.data.tvSeries.genre,
         rating: this.data.tvSeries.rating,
-        network: this.data.tvSeries.network,
+        networkId: this.data.tvSeries.networkId,
       });
     }
   }
@@ -76,11 +76,7 @@ export class AddTvSeriesComponent implements OnInit {
     console.log(this.form.value);
     const tvSeries = this.form.value as TVSeries;
     tvSeries.userId = this.userId;
-    this.networkSelected = this.networks.find((n) => n.id === this.form.value.network)
-    if(this.networkSelected) {
-      tvSeries.network = this.networkSelected.networkName;
-      tvSeries.networkLogo = this.networkSelected
-    }
+    tvSeries.networkId = this.form.value.networkId;
     if (this.isNew) {
       this.tvService.createTVSeries(tvSeries).subscribe((res) => {
         this.dialogRef.close();
@@ -110,12 +106,7 @@ export class AddTvSeriesComponent implements OnInit {
     this.networks = await this.networkService
       .getNetworkLogos(userId)
       .toPromise();
-    this.networkSelected = this.networks.find(
-      (n) => n.networkName === this.data.tvSeries?.network
-    );
-    if (this.networkSelected) {
-      this.form.patchValue({ network: this.networkSelected.id });
-    }
+    this.form.patchValue({ networkId: this.data.tvSeries.networkId });
   }
 
   addNetwork() {}
