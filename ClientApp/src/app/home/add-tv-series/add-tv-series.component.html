@@ -54,6 +54,7 @@
         <mat-option *ngFor="let net of networks" [value]="net.id" class="bg-dark text-light">
           {{ net.networkName }}
         </mat-option>
+        <mat-option value="0" (click)="openAddNetwork()" class="bg-dark text-light">Add New Network</mat-option>
       </mat-select>
     </mat-form-field>
   </section>

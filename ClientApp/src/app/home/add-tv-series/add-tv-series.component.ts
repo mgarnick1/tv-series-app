@@ -1,10 +1,15 @@
 import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatDialog,
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+} from '@angular/material/dialog';
 import { NetworkService } from 'src/shared/services/network.service';
 import { TvApiService } from 'src/shared/services/tv-api.service';
 import { NetworkLogo } from 'src/_interfaces/tv-series/network-logos.model';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
+import { AddNetworkDialogComponent } from '../add-network-dialog/add-network-dialog.component';
 
 export class AddTvSeriesComponentDialog {
   tvSeries: TVSeries;
@@ -36,7 +41,8 @@ export class AddTvSeriesComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: AddTvSeriesComponentDialog,
     private fb: FormBuilder,
     private networkService: NetworkService,
-    private tvService: TvApiService
+    private tvService: TvApiService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -106,8 +112,19 @@ export class AddTvSeriesComponent implements OnInit {
     this.networks = await this.networkService
       .getNetworkLogos(userId)
       .toPromise();
-    this.form.patchValue({ networkId: this.data.tvSeries.networkId });
+    if (this.data?.tvSeries?.networkId) {
+      this.form.patchValue({ networkId: this.data.tvSeries.networkId });
+    }
   }
 
-  addNetwork() {}
+  openAddNetwork() {
+    const dialogRef = this.dialog.open(AddNetworkDialogComponent, {
+      width: '600px',
+      data: { network: null, userId: this.userId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getUserNetworks(this.userId);
+    });
+  }
 }

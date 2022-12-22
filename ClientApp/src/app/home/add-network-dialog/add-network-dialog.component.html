@@ -1,0 +1,40 @@
+<section fxLayoutAlign="end" class="bg-grey">
+  <button mat-icon-button class="text-light" (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</section>
+<h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">
+  {{ isNew ? "Add Network" : "Edit Network" }}
+</h1>
+<mat-dialog-content [formGroup]="form" class="bg-grey text-light">
+  <section>
+    <mat-form-field fxFlex>
+      <label for="networkName">Network Name:</label>
+      <input matInput formControlName="networkName" />
+    </mat-form-field>
+  </section>
+  <section fxLayout="row" fxLayoutAlign="center center">
+    <mat-form-field fxFlex>
+      <label for="networkLogoUrl"
+        >Network Logo:<button
+          mat-icon-button
+          matPrefix
+          (click)="f_input.click()"
+        >
+          <mat-icon>attach_file</mat-icon>
+        </button></label
+      >
+      <input matInput formControlName="networkLogoUrl" />
+      <input
+        type="file"
+        hidden
+        #f_input
+        (change)="handleUpload(f_input.files)"
+      />
+    </mat-form-field>
+  </section>
+</mat-dialog-content>
+<div mat-dialog-actions fxLayoutAlign="end" class="bg-grey text-light">
+  <button mat-raised-button (click)="close()" class="close">Cancel</button>
+  <button mat-raised-button (click)="save()" class="text-light">Save</button>
+</div>

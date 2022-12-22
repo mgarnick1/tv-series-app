@@ -25,6 +25,7 @@ import { TvRatingStarComponent } from './home/tv-rating-star/tv-rating-star.comp
 import { SpinnerComponent } from './home/spinner/spinner.component';
 import { LoadingInterceptor } from 'src/shared/services/loading.interceptor';
 import { MatSelectModule } from '@angular/material/select';
+import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network-dialog.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { MatSelectModule } from '@angular/material/select';
     TvSeriesCardComponent,
     TvRatingStarComponent,
     SpinnerComponent,
+    AddNetworkDialogComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
