@@ -19,7 +19,7 @@ export class AddNetworkDialogComponent implements OnInit {
   form: FormGroup;
   networkName: string;
   userId: string;
-  networkLogoUrl: string;
+  logoUrl: string;
   isNew: boolean = true;
 
   constructor(
@@ -36,12 +36,12 @@ export class AddNetworkDialogComponent implements OnInit {
     this.isNew = this.data?.network === null;
     this.form = this.fb.group({
       networkName: [this.networkName, []],
-      networkLogoUrl: [this.networkLogoUrl, []],
+      logoUrl: [this.logoUrl, []],
     });
     if (!this.isNew && this.data?.network?.id) {
       this.form.setValue({
         networkName: this.data.network.networkName,
-        networkLogoUrl: this.data.network.logoUrl,
+        logoUrl: this.data.network.logoUrl,
       });
     }
   }

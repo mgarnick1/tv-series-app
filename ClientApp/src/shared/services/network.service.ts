@@ -19,11 +19,11 @@ export class NetworkService {
 
   createNetworkLogo(network: NetworkLogo) {
     let params = new HttpParams();
-    return this.apiService.postItem(`${this.url}/add`, network, params);
+    return this.apiService.postItem(`/${this.url}/add`, network, params);
   }
 
   editNetworkLogo(network: NetworkLogo) {
     let params = new HttpParams();
-    return this.apiService.editItem(`${this.url}/edit`, network, params);
+    return this.apiService.editItem(`/${this.url}/edit`, network, params);
   }
 }

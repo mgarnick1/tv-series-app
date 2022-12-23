@@ -34,5 +34,19 @@ public class NetworkLogoController : ControllerBase
     {
         return Ok(await _repository.GetUserNetworkLogos(userId));
     }
+
+    [HttpPost]
+    [Route("add")]
+    public async Task<IActionResult> CreateNetwork([FromBody] NetworkLogoViewModel model)
+    {
+        return Ok(await _repository.CreateNetwork(model));
+    }
+
+    [HttpPut]
+    [Route("edit")]
+    public async Task<IActionResult> UpdateNetwork([FromBody] NetworkLogoViewModel model)
+    {
+       return  Ok(await _repository.UpdateNetwork(model));
+    }
 }
 
