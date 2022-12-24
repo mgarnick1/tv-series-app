@@ -118,6 +118,10 @@ export class AddTvSeriesComponent implements OnInit {
     }
   }
 
+  setNetworkSelected(net: NetworkLogo) {
+    this.networkSelected = this.networks.find((n) => n.id === net.id)
+  }
+
   openAddNetwork() {
     const dialogRef = this.dialog.open(AddNetworkDialogComponent, {
       width: '600px',

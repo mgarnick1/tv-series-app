@@ -57,13 +57,14 @@
         class="text-light"
         required
       >
-        <mat-select-trigger *ngIf="data.tvSeries.networkId">
+        <mat-select-trigger>
           {{ networkSelected?.networkName }}
         </mat-select-trigger>
         <mat-option
           *ngFor="let net of networks"
           [value]="net.id"
           class="bg-dark text-light"
+          (click)="setNetworkSelected(net)"
         >
           <span fxLayout="row" fxLayoutAlign="space-between">
             {{ net.networkName }}

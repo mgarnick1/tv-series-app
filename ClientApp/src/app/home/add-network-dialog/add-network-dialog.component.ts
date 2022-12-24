@@ -73,7 +73,7 @@ export class AddNetworkDialogComponent implements OnInit {
       this.tvService
         .uploadImageGetUrl(formData, this.userId)
         .subscribe((res) => {
-          this.form.patchValue({ networkLogoUrl: res });
+          this.form.patchValue({ logoUrl: res });
         });
     }
   }

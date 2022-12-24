@@ -19,7 +19,7 @@
         >Network Logo:<button
           mat-icon-button
           matPrefix
-          (click)="f_input.click()"
+          (click)="f_input_network.click()"
         >
           <mat-icon>attach_file</mat-icon>
         </button></label
@@ -28,8 +28,8 @@
       <input
         type="file"
         hidden
-        #f_input
-        (change)="handleUpload(f_input.files)"
+        #f_input_network
+        (change)="handleUpload(f_input_network.files)"
       />
     </mat-form-field>
   </section>
