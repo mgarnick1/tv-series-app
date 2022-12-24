@@ -114,6 +114,7 @@ export class AddTvSeriesComponent implements OnInit {
       .toPromise();
     if (this.data?.tvSeries?.networkId) {
       this.form.patchValue({ networkId: this.data.tvSeries.networkId });
+      this.networkSelected = this.networks.find((n) => n.id === this.data.tvSeries.networkId)
     }
   }
 
@@ -121,6 +122,17 @@ export class AddTvSeriesComponent implements OnInit {
     const dialogRef = this.dialog.open(AddNetworkDialogComponent, {
       width: '600px',
       data: { network: null, userId: this.userId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.getUserNetworks(this.userId);
+    });
+  }
+
+  editNetwork(networkLogo: NetworkLogo) {
+    const dialogRef = this.dialog.open(AddNetworkDialogComponent, {
+      width: '600px',
+      data: { network: networkLogo, userId: this.userId },
     });
 
     dialogRef.afterClosed().subscribe((result) => {

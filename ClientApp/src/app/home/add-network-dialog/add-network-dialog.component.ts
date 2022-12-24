@@ -58,6 +58,7 @@ export class AddNetworkDialogComponent implements OnInit {
         this.dialogRef.close();
       });
     } else {
+      network.id = this.data.network.id
       this.networkService.editNetworkLogo(network).subscribe((res) => {
         this.dialogRef.close();
       });

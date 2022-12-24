@@ -50,11 +50,32 @@
   <section fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex class="text-light">
       <label for="networkId">Network:</label>
-      <mat-select formControlName="networkId" class="text-light" required>
-        <mat-option *ngFor="let net of networks" [value]="net.id" class="bg-dark text-light">
-          {{ net.networkName }}
+      <mat-select
+        fxLayout="row"
+        fxLayoutAlign="space-between"
+        formControlName="networkId"
+        class="text-light"
+        required
+      >
+        <mat-select-trigger *ngIf="data.tvSeries.networkId">
+          {{ networkSelected?.networkName }}
+        </mat-select-trigger>
+        <mat-option
+          *ngFor="let net of networks"
+          [value]="net.id"
+          class="bg-dark text-light"
+        >
+          <span fxLayout="row" fxLayoutAlign="space-between">
+            {{ net.networkName }}
+            <mat-icon (click)="editNetwork(net)">edit</mat-icon>
+          </span>
         </mat-option>
-        <mat-option value="0" (click)="openAddNetwork()" class="bg-dark text-light">Add New Network</mat-option>
+        <mat-option
+          value="0"
+          (click)="openAddNetwork()"
+          class="bg-dark text-light"
+          >Add New Network</mat-option
+        >
       </mat-select>
     </mat-form-field>
   </section>
