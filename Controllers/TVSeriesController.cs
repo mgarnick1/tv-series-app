@@ -20,14 +20,16 @@ public class TVSeriesController : ControllerBase
     private readonly UserManager<User> _userManager;
     private readonly ITVSeriesRepository _repository;
     private readonly IFileUploadRepsitory _fileUpload;
+    private readonly IEmailRepository _emailRepo;
 
-    public TVSeriesController(ILogger<TVSeriesController> logger, IMapper mapper, UserManager<User> userManager, ITVSeriesRepository repository, IFileUploadRepsitory fileUpload)
+    public TVSeriesController(ILogger<TVSeriesController> logger, IMapper mapper, UserManager<User> userManager, ITVSeriesRepository repository, IFileUploadRepsitory fileUpload, IEmailRepository emailRepo)
     {
         _logger = logger;
         _mapper = mapper;
         _userManager = userManager;
         _repository = repository;
         _fileUpload = fileUpload;
+        _emailRepo = emailRepo;
     }
 
 
@@ -68,5 +70,14 @@ public class TVSeriesController : ControllerBase
             return BadRequest("failed to upload image");
         }
         return Ok(url);
+    }
+
+    [HttpPost]
+    [Route("send-message")]
+    public async Task<IActionResult> SendEmail([FromBody] EmailModel email)
+    {   
+        CancellationTokenSource cts = new CancellationTokenSource();
+        CancellationToken token = cts.Token;
+        return Ok(await _emailRepo.SendEmailRecommendation(email, token));
     }
 }

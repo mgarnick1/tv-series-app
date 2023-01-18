@@ -60,6 +60,7 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ITVSeriesRepository, TVSeriesRepository>();
 builder.Services.AddScoped<IFileUploadRepsitory, FileUploadRepository>();
 builder.Services.AddScoped<INetworkLogoRepository, NetworkLogoRepository>();
+builder.Services.AddScoped<IEmailRepository, EmailRepository>();
 builder.Services.AddScoped<JwtHandler>();
 
 
