@@ -80,4 +80,11 @@ public class TVSeriesController : ControllerBase
         CancellationToken token = cts.Token;
         return Ok(await _emailRepo.SendEmailRecommendation(email, token));
     }
+
+    [HttpGet]
+    [Route("recommendations")]
+    public async Task<IActionResult> GetRecommendations([FromQuery] int page)
+    {
+        return Ok(await _repository.GetEpisodeDateRecommendations(page));
+    }
 }

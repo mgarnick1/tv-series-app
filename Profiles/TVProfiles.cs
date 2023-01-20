@@ -29,6 +29,19 @@ namespace tv_series_app.Profiles
 
             CreateMap<NetworkLogo, NetworkLogoViewModel>()
             ;
+
+            CreateMap<EpisodeDateTVShowsViewModel, TVSeriesViewModel>()
+                .ForMember(tvm => tvm.Id, ep => ep.Ignore())
+                .ForMember(tvm => tvm.Name, ep => ep.MapFrom(_ => _.name))
+                .ForMember(tvm => tvm.Description, ep => ep.MapFrom(_ => _.permalink))
+                .ForMember(tvm => tvm.ShowImage, ep => ep.MapFrom(_ => _.image_thumbnail_path))
+                .ForMember(tvm => tvm.Rating, ep => ep.Ignore())
+                .ForMember(tvm => tvm.Genre, ep => ep.Ignore())
+                .ForMember(tvm => tvm.NetworkId, ep => ep.Ignore())
+                .ForMember(tvm => tvm.NetworkLogoUrl, ep => ep.Ignore())
+                .ForMember(tvm => tvm.UserId, ep => ep.Ignore())
+                .ForMember(tvm => tvm.NetworkLogo, ep => ep.Ignore())
+            ;
         }
     }
 }

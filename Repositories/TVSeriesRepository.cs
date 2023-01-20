@@ -1,10 +1,12 @@
 using System;
 using AutoMapper;
+using System.Text.Json;
 using tv_series_app.Models;
 using tv_series_app.ViewModels;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper.QueryableExtensions;
+using RestSharp;
 
 namespace tv_series_app.Repositories
 {
@@ -65,6 +67,30 @@ namespace tv_series_app.Repositories
                 .ProjectTo<TVSeriesViewModel>(_config)
                 .Where(_ => _.UserId == userId)
                 .ToListAsync();
+
+        }
+
+        public async Task<List<TVSeriesViewModel>> GetEpisodeDateRecommendations(int page)
+        {
+            RestClient client = new RestClient("https://www.episodate.com/api");
+            RestRequest request = new RestRequest("most-popular");
+            request.AddParameter("page", page);
+
+            var response = await client.GetAsync<EpisodeDateViewModel>(request);
+            
+            var showsList = response?.tv_shows;
+
+            List<TVSeriesViewModel> recommendations = new List<TVSeriesViewModel>() { };
+            if (response != null && showsList.Count() > 0)
+            {
+                foreach(var show in showsList)
+                {
+                   var tvSeries = _mapper.Map<TVSeriesViewModel>(show);
+                   recommendations.Add(tvSeries);
+                }
+            }
+            return recommendations;
+
 
         }
     }
