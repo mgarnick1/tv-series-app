@@ -26,6 +26,7 @@ import { SpinnerComponent } from './home/spinner/spinner.component';
 import { LoadingInterceptor } from 'src/shared/services/loading.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network-dialog.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network
     TvRatingStarComponent,
     SpinnerComponent,
     AddNetworkDialogComponent,
+    RecommendationsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -52,6 +54,10 @@ import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network
           import('./authentication/authentication.module').then(
             (m) => m.AuthenticationModule
           ),
+      },
+      {
+        path: 'recommendations',
+        component: RecommendationsComponent, pathMatch: 'full'
       },
     ]),
     BrowserAnimationsModule,

@@ -14,6 +14,7 @@ import { AddNetworkDialogComponent } from '../add-network-dialog/add-network-dia
 export class AddTvSeriesComponentDialog {
   tvSeries: TVSeries;
   userId: string;
+  recommendation: boolean
 }
 
 @Component({
@@ -58,6 +59,17 @@ export class AddTvSeriesComponent implements OnInit {
       networkId: [this.networkId, []],
     });
     if (!this.isNew && this.data?.tvSeries?.id) {
+      this.form.setValue({
+        name: this.data.tvSeries.name,
+        showImage: this.data.tvSeries.showImage,
+        description: this.data.tvSeries.description,
+        genre: this.data.tvSeries.genre,
+        rating: this.data.tvSeries.rating,
+        networkId: this.data.tvSeries.networkId,
+      });
+    }
+    if(this.data.recommendation) {
+      this.isNew = true
       this.form.setValue({
         name: this.data.tvSeries.name,
         showImage: this.data.tvSeries.showImage,

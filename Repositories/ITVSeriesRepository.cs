@@ -10,7 +10,7 @@ namespace tv_series_app.Repositories
         Task<TVSeries?> EditTVSeries(TVSeriesViewModel tvSeries);
         Task<TVSeries?> GetTVSeries(int id);
         Task<List<TVSeriesViewModel>> GetAllTVSeriesByUserId(string userId);
-        Task<List<TVSeriesViewModel>> GetEpisodeDateRecommendations(int page);
+        Task<List<TVSeriesViewModel>> GetEpisodeDateRecommendations(int page, string userId);
         
     }
 }

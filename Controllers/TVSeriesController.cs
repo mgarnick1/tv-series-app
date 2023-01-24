@@ -83,8 +83,8 @@ public class TVSeriesController : ControllerBase
 
     [HttpGet]
     [Route("recommendations")]
-    public async Task<IActionResult> GetRecommendations([FromQuery] int page)
+    public async Task<IActionResult> GetRecommendations([FromQuery] int page, string userId)
     {
-        return Ok(await _repository.GetEpisodeDateRecommendations(page));
+        return Ok(await _repository.GetEpisodeDateRecommendations(page, userId));
     }
 }

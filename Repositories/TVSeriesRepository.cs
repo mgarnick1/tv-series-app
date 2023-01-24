@@ -16,11 +16,14 @@ namespace tv_series_app.Repositories
         private AutoMapper.IConfigurationProvider _config;
         public readonly IMapper _mapper;
 
-        public TVSeriesRepository(DataContext context, IMapper mapper, AutoMapper.IConfigurationProvider config)
+        private readonly INetworkLogoRepository _networkRepo;
+
+        public TVSeriesRepository(DataContext context, IMapper mapper, AutoMapper.IConfigurationProvider config, INetworkLogoRepository networkLogo)
         {
             _context = context;
             _mapper = mapper;
             _config = config;
+            _networkRepo = networkLogo;
 
 
         }
@@ -70,25 +73,37 @@ namespace tv_series_app.Repositories
 
         }
 
-        public async Task<List<TVSeriesViewModel>> GetEpisodeDateRecommendations(int page)
+        public async Task<List<TVSeriesViewModel>> GetEpisodeDateRecommendations(int page, string userId)
         {
             RestClient client = new RestClient("https://www.episodate.com/api");
             RestRequest request = new RestRequest("most-popular");
             request.AddParameter("page", page);
 
             var response = await client.GetAsync<EpisodeDateViewModel>(request);
-            
+
             var showsList = response?.tv_shows;
 
             List<TVSeriesViewModel> recommendations = new List<TVSeriesViewModel>() { };
             if (response != null && showsList.Count() > 0)
             {
-                foreach(var show in showsList)
+                var networks = await _networkRepo.GetUserNetworkLogos(userId);
+                foreach (var show in showsList)
                 {
-                   var tvSeries = _mapper.Map<TVSeriesViewModel>(show);
-                   recommendations.Add(tvSeries);
+                    var network = networks.FirstOrDefault(_ => _.NetworkName == show.network);
+                    var tvSeries = _mapper.Map<TVSeriesViewModel>(show);
+                    tvSeries.UserId = userId;
+                    if (network != null)
+                    {
+                        tvSeries.NetworkId = network.Id;
+                        tvSeries.NetworkLogoUrl = network.LogoUrl;
+                        
+                    }
+
+                    recommendations.Add(tvSeries);
                 }
             }
+            List<TVSeriesViewModel> tvSeriesList = await GetAllTVSeriesByUserId(userId);
+            recommendations = (List<TVSeriesViewModel>)recommendations.Where(x => !tvSeriesList.Any(_ => _.Name.ToLower() == x.Name.ToLower())).ToList();
             return recommendations;
 
 

@@ -61,4 +61,8 @@ export class NavMenuComponent implements OnInit {
         console.log(res);
       });
   }
+
+  getRecommendations() {
+    this.router.navigate(['/recommendations'])
+  }
 }

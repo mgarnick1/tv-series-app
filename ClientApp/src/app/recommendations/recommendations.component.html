@@ -1,0 +1,12 @@
+<section *ngIf="user?.id && user?.tvSeries?.length">
+    <h1 class="text-light">TV Shows</h1>
+    <p class="text-light">Here is your TV show library</p>
+    <div fxLayout="row wrap center" fxLayoutGap="16px grid">
+      <div *ngFor="let tv of tvSeries; let i = index">
+        <app-tv-series-card
+          [tvSeries]="tv"
+          (selectTvSeries)="AddShow(tv)"
+        ></app-tv-series-card>
+      </div>
+    </div>
+  </section>

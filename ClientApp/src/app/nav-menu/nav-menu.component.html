@@ -50,6 +50,9 @@
             <li class="nav-item" *ngIf="user && user.firstName">
               <button class="btn btn-link text-light text-decoration-none" (click)="getUser()">Hello {{user.firstName}}</button>
             </li>
+            <li class="nav-item" *ngIf="user && user.firstName">
+              <button class="btn btn-link text-light text-decoration-none" (click)="getRecommendations()">Recommendations</button>
+            </li>
             <li class="nav-item">
               <button
                 class="btn btn-link text-light text-decoration-none"

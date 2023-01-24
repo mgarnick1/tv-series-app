@@ -1,0 +1,48 @@
+table {
+  width: 100%;
+  max-height: 500px;
+  overflow: auto;
+}
+
+th.mat-column-showImage {
+  padding-left: 24px;
+}
+
+table td {
+  padding-right: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+  object-fit: contain;
+  aspect-ratio: 1/1;
+}
+
+.missing-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+
+.background-image {
+  width: 100%;
+  height: 80%;
+  background-image: url("src/assets/shows_backgound.jpeg");
+  opacity: 0.2;
+  z-index: 3;
+}
+
+.mat-button,
+.mat-raised-button {
+  background-color: #1861ac;
+  border: #1861ac;
+}
+
+.pointer {
+  cursor: pointer;
+}

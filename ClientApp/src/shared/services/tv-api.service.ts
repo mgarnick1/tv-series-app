@@ -9,9 +9,7 @@ import { ApiServiceService } from './api-service.service';
 export class TvApiService {
   url = '/api/tv-series';
 
-  constructor(
-    private apiService: ApiServiceService
-  ) {}
+  constructor(private apiService: ApiServiceService) {}
 
   createTVSeries(tvSeries: TVSeries) {
     let params = new HttpParams();
@@ -31,5 +29,12 @@ export class TvApiService {
       formData,
       params
     );
+  }
+
+  getRecommendations(page: number, userId: string) {
+    let params = new HttpParams();
+    params = params.set("page", page)
+    params = params.set("userId", userId)
+    return this.apiService.getItem(`api/tv-series/recommendations`, params )
   }
 }
