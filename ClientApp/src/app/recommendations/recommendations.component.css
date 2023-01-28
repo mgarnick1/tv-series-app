@@ -46,3 +46,8 @@ img {
 .pointer {
   cursor: pointer;
 }
+
+.button-container {
+  margin: 2% 0;
+  z-index: 1;
+}

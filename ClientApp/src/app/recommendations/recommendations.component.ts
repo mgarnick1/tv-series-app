@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { LocalService } from 'src/shared/services/local-service.service';
 import { TvApiService } from 'src/shared/services/tv-api.service';
 import { UserService } from 'src/shared/services/user.service';
@@ -16,7 +17,9 @@ import { AddTvSeriesComponent } from '../home/add-tv-series/add-tv-series.compon
 export class RecommendationsComponent implements OnInit {
   tvSeries: TVSeries[] = [];
   user: TVUser;
-  page = 1
+  page = 1;
+  fetching: boolean = false;
+
   constructor(
     private userService: UserService,
     private storage: LocalService,
@@ -30,9 +33,11 @@ export class RecommendationsComponent implements OnInit {
       const userObj = JSON.parse(user) as ActiveUser;
       this.userService.getUser(userObj.id).subscribe((res) => {
         this.user = res;
-        this.tvService.getRecommendations(this.page, this.user.id).subscribe((res) => {
-          this.tvSeries = res as TVSeries[];
-        })
+        this.tvService
+          .getRecommendations(this.page, this.user.id)
+          .subscribe((res) => {
+            this.tvSeries = res as TVSeries[];
+          });
       });
     }
   }
@@ -44,9 +49,24 @@ export class RecommendationsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.tvService.getRecommendations(this.page, this.user.id).subscribe((res) => {
-        this.tvSeries = res as TVSeries[];
-      })
+      this.tvService
+        .getRecommendations(this.page, this.user.id)
+        .subscribe((res) => {
+          this.tvSeries = res as TVSeries[];
+        });
     });
+  }
+
+  getNextRecommendations(): void {
+    this.fetching = !this.fetching
+    this.page++
+    this.tvService
+      .getRecommendations(this.page, this.user.id)
+      .subscribe((res) => {
+        const newRecommendations = res as TVSeries[];
+        const allRecommendations = this.tvSeries.concat(newRecommendations);
+        this.tvSeries = allRecommendations;
+        this.fetching = !this.fetching
+      });
   }
 }
