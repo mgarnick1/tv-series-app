@@ -1,5 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { EmailRecommendation } from 'src/_interfaces/tv-series/email-recommendation.model';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
 import { ApiServiceService } from './api-service.service';
 
@@ -36,5 +37,10 @@ export class TvApiService {
     params = params.set("page", page)
     params = params.set("userId", userId)
     return this.apiService.getItem(`api/tv-series/recommendations`, params )
+  }
+
+  sendRecommendation(email: EmailRecommendation) {
+    let params = new HttpParams();
+    return this.apiService.postItem(`${this.url}/send-message`, email, params)
   }
 }

@@ -6,6 +6,7 @@
         <app-tv-series-card
           [tvSeries]="tv"
           (selectTvSeries)="AddShow(tv)"
+          (sendEmailRecommendation)="sendEmail(tv)"
         ></app-tv-series-card>
       </div>
     </div>

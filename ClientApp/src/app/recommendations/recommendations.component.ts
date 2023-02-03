@@ -2,6 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { LocalService } from 'src/shared/services/local-service.service';
+import { NetworkService } from 'src/shared/services/network.service';
 import { TvApiService } from 'src/shared/services/tv-api.service';
 import { UserService } from 'src/shared/services/user.service';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
@@ -24,6 +25,7 @@ export class RecommendationsComponent implements OnInit {
     private userService: UserService,
     private storage: LocalService,
     private tvService: TvApiService,
+    private networkService: NetworkService,
     public dialog: MatDialog
   ) {}
 
@@ -58,15 +60,18 @@ export class RecommendationsComponent implements OnInit {
   }
 
   getNextRecommendations(): void {
-    this.fetching = !this.fetching
-    this.page++
+    this.fetching = !this.fetching;
+    this.page++;
     this.tvService
       .getRecommendations(this.page, this.user.id)
       .subscribe((res) => {
         const newRecommendations = res as TVSeries[];
         const allRecommendations = this.tvSeries.concat(newRecommendations);
         this.tvSeries = allRecommendations;
-        this.fetching = !this.fetching
+        this.fetching = !this.fetching;
       });
+  }
+
+  sendEmail(tvSeries: TVSeries) {
   }
 }

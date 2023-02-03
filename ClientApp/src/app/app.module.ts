@@ -27,6 +27,7 @@ import { LoadingInterceptor } from 'src/shared/services/loading.interceptor';
 import { MatSelectModule } from '@angular/material/select';
 import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network-dialog.component';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
+import { EmailRecommendationComponent } from './home/email-recommendation/email-recommendation.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { RecommendationsComponent } from './recommendations/recommendations.comp
     SpinnerComponent,
     AddNetworkDialogComponent,
     RecommendationsComponent,
+    EmailRecommendationComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

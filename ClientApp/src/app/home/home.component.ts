@@ -66,4 +66,8 @@ export class HomeComponent implements OnInit {
       this.fetching = false;
     });
   }
+
+  openEmailRecommendation(tvSeries: TVSeries) {
+    
+  }
 }
