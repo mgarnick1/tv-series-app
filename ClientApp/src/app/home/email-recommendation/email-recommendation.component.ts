@@ -54,12 +54,20 @@ export class EmailRecommendationComponent implements OnInit {
 
   sendEmail() {
     if (this.to) {
+      this.email.to = this.to;
       this.tvService.sendRecommendation(this.email).subscribe(
         (res) => {
           if (res) {
             this.to = '';
-            this.dialogRef.close();
+            this.email.to = '';
+            this.email.from = '';
+            this.email.subject = '';
+            this.email.friendName = '';
+            this.email.series = '';
+            this.email.network = '';
+            this.email.image = '';
           }
+          this.dialogRef.close();
         },
         (e) => {
           console.log('Failed to send email recommendation', e);
