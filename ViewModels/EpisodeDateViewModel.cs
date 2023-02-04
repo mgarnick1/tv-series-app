@@ -24,6 +24,7 @@ namespace tv_series_app.ViewModels
         public int? networkId { get; set; }
         public string? status { get; set; }
         public string? image_thumbnail_path { get; set; }
+        public NetworkLogoViewModel? NetworkLogo { get; set; }
 
     }
 }

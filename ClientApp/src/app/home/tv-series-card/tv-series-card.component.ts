@@ -9,7 +9,6 @@ import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
 export class TvSeriesCardComponent implements OnInit {
   @Input() tvSeries: TVSeries;
   @Output() selectTvSeries = new EventEmitter<TVSeries>();
-  @Output() sendEmailRecommendation = new EventEmitter<TVSeries>();
   starCount: number = 5;
   constructor() {}
 
@@ -17,10 +16,6 @@ export class TvSeriesCardComponent implements OnInit {
 
   edit(tvSeries: TVSeries) {
     this.selectTvSeries.emit(tvSeries);
-  }
-
-  sendEmail(tvSeries: TVSeries) {
-    this.sendEmailRecommendation.emit(tvSeries);
   }
 
   networkLogo(networkLogo: string): string {

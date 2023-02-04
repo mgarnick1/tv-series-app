@@ -15,6 +15,7 @@ namespace tv_series_app.ViewModels
         public int? NetworkId { get; set; }
         public string? NetworkLogoUrl { get; set; }
         public NetworkLogo? NetworkLogo { get; set; }
+        public string? NetworkName { get; set; }
 
 
     }

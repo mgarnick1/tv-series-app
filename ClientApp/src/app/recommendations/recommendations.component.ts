@@ -25,7 +25,6 @@ export class RecommendationsComponent implements OnInit {
     private userService: UserService,
     private storage: LocalService,
     private tvService: TvApiService,
-    private networkService: NetworkService,
     public dialog: MatDialog
   ) {}
 

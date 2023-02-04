@@ -23,11 +23,15 @@ namespace tv_series_app.Profiles
 
             CreateMap<TVSeries, TVSeriesViewModel>()
                 .ForMember(tvm => tvm.NetworkLogoUrl, tv => tv.MapFrom(_ => _.NetworkLogo.LogoUrl))
+                .ForMember(tvm => tvm.NetworkName, tv => tv.MapFrom(_ => _.NetworkLogo.NetworkName))
             ;
             CreateMap<TVSeriesViewModel, TVSeries>()
             ;
 
             CreateMap<NetworkLogo, NetworkLogoViewModel>()
+            ;
+
+             CreateMap<NetworkLogo, NetworkLogoViewModel>().ReverseMap()
             ;
 
             CreateMap<EpisodeDateTVShowsViewModel, TVSeriesViewModel>()
@@ -40,7 +44,8 @@ namespace tv_series_app.Profiles
                 .ForMember(tvm => tvm.NetworkId, ep => ep.Ignore())
                 .ForMember(tvm => tvm.NetworkLogoUrl, ep => ep.Ignore())
                 .ForMember(tvm => tvm.UserId, ep => ep.Ignore())
-                .ForMember(tvm => tvm.NetworkLogo, ep => ep.Ignore())
+                .ForMember(tvm => tvm.NetworkLogo, ep => ep.MapFrom(_ => _.NetworkLogo))
+                .ForMember(tvm => tvm.NetworkName, ep => ep.MapFrom(_ => _.network))
             ;
         }
     }

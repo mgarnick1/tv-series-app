@@ -1,4 +1,9 @@
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  Inject,
+  OnInit,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   MatDialog,
@@ -14,7 +19,7 @@ import { AddNetworkDialogComponent } from '../add-network-dialog/add-network-dia
 export class AddTvSeriesComponentDialog {
   tvSeries: TVSeries;
   userId: string;
-  recommendation: boolean
+  recommendation: boolean;
 }
 
 @Component({
@@ -68,8 +73,8 @@ export class AddTvSeriesComponent implements OnInit {
         networkId: this.data.tvSeries.networkId,
       });
     }
-    if(this.data.recommendation) {
-      this.isNew = true
+    if (this.data.recommendation) {
+      this.isNew = true;
       this.form.setValue({
         name: this.data.tvSeries.name,
         showImage: this.data.tvSeries.showImage,
@@ -126,12 +131,14 @@ export class AddTvSeriesComponent implements OnInit {
       .toPromise();
     if (this.data?.tvSeries?.networkId) {
       this.form.patchValue({ networkId: this.data.tvSeries.networkId });
-      this.networkSelected = this.networks.find((n) => n.id === this.data.tvSeries.networkId)
+      this.networkSelected = this.networks.find(
+        (n) => n.id === this.data.tvSeries.networkId
+      );
     }
   }
 
   setNetworkSelected(net: NetworkLogo) {
-    this.networkSelected = this.networks.find((n) => n.id === net.id)
+    this.networkSelected = this.networks.find((n) => n.id === net.id);
   }
 
   openAddNetwork() {
@@ -154,5 +161,9 @@ export class AddTvSeriesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result) => {
       this.getUserNetworks(this.userId);
     });
+  }
+
+  openEmailRecommendation() {
+
   }
 }

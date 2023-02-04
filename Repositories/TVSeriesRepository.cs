@@ -96,6 +96,7 @@ namespace tv_series_app.Repositories
                     {
                         tvSeries.NetworkId = network.Id;
                         tvSeries.NetworkLogoUrl = network.LogoUrl;
+                        tvSeries.NetworkLogo = _mapper.Map<NetworkLogo>(network);
                         
                     }
 

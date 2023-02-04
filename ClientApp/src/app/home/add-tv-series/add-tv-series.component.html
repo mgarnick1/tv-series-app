@@ -3,9 +3,24 @@
     <mat-icon>close</mat-icon>
   </button>
 </section>
-<h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">
-  {{ isNew ? "Add TV Series" : "Edit TV Series" }}
-</h1>
+<section fxLayout="row">
+  <div fxLayout="column">
+    <button
+      fxLayoutAlign="start"
+      mat-icon-button
+      color="primary"
+      (click)="openEmailRecommendation()"
+      class="send-email-btn"
+    >
+      <mat-icon>email</mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="center" fxFlex>
+    <h1 mat-dialog-title class="bg-grey text-light" fxLayoutAlign="center" fxFlexOffset="2px">
+      {{ isNew ? "Add TV Series" : "Edit TV Series" }}
+    </h1>
+  </div>
+</section>
 <mat-dialog-content [formGroup]="form" class="bg-grey text-light">
   <section fxLayout="row" fxLayoutAlign="center center">
     <mat-form-field fxFlex>
