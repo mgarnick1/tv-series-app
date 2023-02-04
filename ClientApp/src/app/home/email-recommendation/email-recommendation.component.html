@@ -1,1 +1,21 @@
-<p>email-recommendation works!</p>
+<section fxLayoutAlign="end" class="bg-grey">
+    <button mat-icon-button class="text-light" (click)="close()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </section>
+  <h1 mat-dialog-title fxLayoutAlign="center center" class="bg-grey text-light">
+    {{ data.tvSeries.name}} 
+  </h1>
+  <mat-dialog-content class="bg-grey text-light">
+    <section>
+      <mat-form-field fxFlex>
+        <label >Email:</label>
+        <input matInput name="to"  [(ngModel)]="to" />
+      </mat-form-field>
+    </section>
+  </mat-dialog-content>
+  <div mat-dialog-actions fxLayoutAlign="end" class="bg-grey text-light">
+    <button mat-raised-button (click)="close()" class="close">Cancel</button>
+    <button mat-raised-button (click)="sendEmail()" class="text-light">Send Recommendation</button>
+  </div>
+  

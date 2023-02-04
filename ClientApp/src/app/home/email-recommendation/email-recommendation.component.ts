@@ -21,7 +21,15 @@ export class EmailRecommendationComponent implements OnInit {
   from: string = '';
   friendName: string = '';
   networkName: string = '';
-  email: EmailRecommendation;
+  email: EmailRecommendation = {
+    to: '',
+    from: '',
+    subject: '',
+    friendName: '',
+    series: '',
+    network: '',
+    image: '',
+  };
   constructor(
     public dialogRef: MatDialogRef<EmailRecommendationComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EmailRecommendationComponentDialog,
@@ -41,7 +49,7 @@ export class EmailRecommendationComponent implements OnInit {
   }
 
   close() {
-    this.dialogRef.close()
+    this.dialogRef.close();
   }
 
   sendEmail() {

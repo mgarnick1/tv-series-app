@@ -1,20 +1,18 @@
-import {
-  Component,
-  Inject,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import {
   MatDialog,
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
+import { LocalService } from 'src/shared/services/local-service.service';
 import { NetworkService } from 'src/shared/services/network.service';
 import { TvApiService } from 'src/shared/services/tv-api.service';
 import { NetworkLogo } from 'src/_interfaces/tv-series/network-logos.model';
 import { TVSeries } from 'src/_interfaces/tv-series/tv-series.model';
+import { ActiveUser } from 'src/_interfaces/user/active-user.model';
 import { AddNetworkDialogComponent } from '../add-network-dialog/add-network-dialog.component';
+import { EmailRecommendationComponent, EmailRecommendationComponentDialog } from '../email-recommendation/email-recommendation.component';
 
 export class AddTvSeriesComponentDialog {
   tvSeries: TVSeries;
@@ -48,7 +46,8 @@ export class AddTvSeriesComponent implements OnInit {
     private fb: FormBuilder,
     private networkService: NetworkService,
     private tvService: TvApiService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private storage: LocalService
   ) {}
 
   ngOnInit(): void {
@@ -164,6 +163,23 @@ export class AddTvSeriesComponent implements OnInit {
   }
 
   openEmailRecommendation() {
+    const userJSON = this.storage.getData('user');
+    let user: ActiveUser;
+    if (userJSON) {
+      user = JSON.parse(userJSON) as ActiveUser;
+      if (user && user.email) { 
+        const dialogRef = this.dialog.open(EmailRecommendationComponent, {
+          width: '600px',
+          data: {
+            from: user.email,
+            friendName: `${user.firstName} ${user.lastName}`,
+            networkName: this.data.tvSeries.networkName,
+            tvSeries: this.data.tvSeries,
+          },
+        });
 
+        dialogRef.afterClosed().subscribe((result) => {});
+      }
+    }
   }
 }

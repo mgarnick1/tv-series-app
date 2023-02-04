@@ -10,4 +10,5 @@ export interface TVSeries {
     genre: string;
     networkId: number;
     networkLogoUrl: string;
+    networkName: string;
 }

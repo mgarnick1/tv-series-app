@@ -29,6 +29,7 @@ import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network
 import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { EmailRecommendationComponent } from './home/email-recommendation/email-recommendation.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
