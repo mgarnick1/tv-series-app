@@ -6,6 +6,7 @@ import { ActiveUser } from 'src/_interfaces/user/active-user.model';
 import { MatDialog } from '@angular/material/dialog';
 import { AddTvSeriesComponent } from './add-tv-series/add-tv-series.component';
 import { TVUser } from 'src/_interfaces/user/tv-user.model';
+import { TvApiService } from 'src/shared/services/tv-api.service';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private userService: UserService,
     private storage: LocalService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private tvService: TvApiService
   ) {}
 
   ngOnInit(): void {
@@ -67,7 +69,17 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  openEmailRecommendation(tvSeries: TVSeries) {
-    
+  async searchTVSeries(filter: string) {
+    const tvSeriesList = this.tvSeries;
+    if (filter?.length >= 3) {
+      this.tvSeries = tvSeriesList.filter(
+        (tv) => tv.name.toLowerCase().indexOf(filter.toLowerCase()) > -1
+      );
+    }
+    if (!filter) {
+      this.tvSeries = await this.tvService
+        .getUserTVSeries(this.user.id)
+        .toPromise();
+    }
   }
 }

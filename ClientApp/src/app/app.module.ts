@@ -28,6 +28,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { AddNetworkDialogComponent } from './home/add-network-dialog/add-network-dialog.component';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
 import { EmailRecommendationComponent } from './home/email-recommendation/email-recommendation.component';
+import { SearchBarComponent } from './home/search-bar/search-bar.component';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { EmailRecommendationComponent } from './home/email-recommendation/email-
     AddNetworkDialogComponent,
     RecommendationsComponent,
     EmailRecommendationComponent,
+    SearchBarComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
