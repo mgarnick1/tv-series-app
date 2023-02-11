@@ -27,6 +27,7 @@ namespace tv_series_app.Repositories
                 .AsNoTracking()
                 .ProjectTo<NetworkLogoViewModel>(_config)
                 .Where(_ => _.UserId == userId)
+                .OrderBy(_ => _.NetworkName)
                 .ToListAsync();
         }
 
