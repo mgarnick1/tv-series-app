@@ -20,7 +20,7 @@ namespace tv_series_app.Services
 
         public SigningCredentials GetSigningCredentials()
         {
-            var key = Encoding.UTF8.GetBytes(_jwtSettings.GetSection("securityKey").Value);
+            var key = Encoding.UTF8.GetBytes(_configuraion["JWTSettings:securityKey"]);
             var secret = new SymmetricSecurityKey(key);
 
             return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
